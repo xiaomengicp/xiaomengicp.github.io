@@ -14,70 +14,89 @@
             line-height: 1.7;
         }
 
-        /* Header bar (replaces sidebar on sub-pages) */
-        .header-bar {
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 240px;
+            height: 100vh;
             background: #1c2a35;
             color: #c8d6df;
-            padding: 1.2rem 2.5rem;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
             display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            flex-direction: column;
         }
 
-        .header-bar .site-name {
-            font-size: 0.85rem;
-            color: #8a9fb0;
-            text-decoration: none;
-            transition: color 0.2s;
+        .sidebar h1 {
+            font-size: 1.05rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
             letter-spacing: 0.02em;
         }
 
-        .header-bar .site-name:hover {
-            color: #e8eff4;
+        .sidebar .subtitle {
+            font-size: 0.72rem;
+            color: #8a9fb0;
+            margin-bottom: 2rem;
+            line-height: 1.5;
         }
 
-        .header-bar nav {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
+        .sidebar nav { margin-bottom: 1.5rem; flex: 1; }
+
+        .sidebar .nav-group {
+            margin-bottom: 1.2rem;
         }
 
-        .header-bar nav a {
-            font-size: 0.78rem;
+        .sidebar .nav-group-title {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
             color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
             text-decoration: none;
+            font-size: 0.78rem;
+            padding: 0.22rem 0;
             transition: color 0.2s;
         }
 
-        .header-bar nav a:hover {
-            color: #a0b8c8;
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            color: #e8eff4;
         }
 
-        /* Main content — single column */
+        .sidebar .links {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.72rem;
+            margin-right: 0.7rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        /* Main content */
         .main {
-            max-width: 740px;
-            margin: 0 auto;
-            padding: 3rem 2rem 5rem;
+            margin-left: 240px;
+            padding: 3rem 3.5rem 5rem;
+            max-width: 920px;
         }
 
         /* Hero */
         .hero {
             margin-bottom: 3rem;
-        }
-
-        .hero .back-link {
-            font-size: 0.78rem;
-            color: #5a7a8f;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            transition: color 0.2s;
-        }
-
-        .hero .back-link:hover {
-            color: #2d4a5e;
         }
 
         .hero h1 {
@@ -103,6 +122,8 @@
             border-bottom: 1px solid #e0e6eb;
         }
 
+        h2:first-of-type { margin-top: 0; }
+
         h3 {
             font-size: 1.1rem;
             color: #2d4a5e;
@@ -123,12 +144,9 @@
             transition: border-color 0.2s;
         }
 
-        a:hover {
-            border-color: #2d4a5e;
-        }
+        a:hover { border-color: #2d4a5e; }
 
         em { color: #3a3a3a; }
-
         strong { color: #1c2a35; }
 
         /* Core question block */
@@ -144,9 +162,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .core-question p:last-child {
-            margin-bottom: 0;
-        }
+        .core-question p:last-child { margin-bottom: 0; }
 
         /* Info cards */
         .info-card {
@@ -180,7 +196,7 @@
             font-style: italic;
         }
 
-        /* Stage tracker / timeline */
+        /* Stage tracker */
         .stage-tracker {
             margin: 2rem 0;
             position: relative;
@@ -201,9 +217,7 @@
             margin-bottom: 2rem;
         }
 
-        .stage:last-child {
-            margin-bottom: 0;
-        }
+        .stage:last-child { margin-bottom: 0; }
 
         .stage-dot {
             position: absolute;
@@ -227,12 +241,6 @@
         .stage.active .stage-dot {
             background: #2d4a5e;
             border-color: #2d4a5e;
-            color: #fff;
-        }
-
-        .stage.completed .stage-dot {
-            background: #1c2a35;
-            border-color: #1c2a35;
             color: #fff;
         }
 
@@ -300,6 +308,7 @@
         }
 
         .pub-tag.production { background: #f5f0e6; color: #7a6030; }
+        .pub-tag.dissertation { background: #e8eef6; color: #2d4a5e; }
 
         /* Reference list */
         .ref-list {
@@ -332,13 +341,9 @@
             transition: border-color 0.2s;
         }
 
-        .related-item:hover {
-            border-color: #c0d0da;
-        }
+        .related-item:hover { border-color: #c0d0da; }
 
-        .related-item a {
-            border-bottom: none;
-        }
+        .related-item a { border-bottom: none; }
 
         .related-item .layer-label {
             font-size: 0.65rem;
@@ -373,9 +378,7 @@
             border-bottom: none;
         }
 
-        .footer a:hover {
-            color: #2d4a5e;
-        }
+        .footer a:hover { color: #2d4a5e; }
 
         .footer p {
             font-size: 0.75rem;
@@ -385,31 +388,17 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header-bar {
-                flex-direction: column;
-                padding: 1rem 1.5rem;
-                gap: 0.6rem;
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 1.5rem;
             }
-
-            .header-bar nav {
-                gap: 1rem;
-            }
-
-            .main {
-                padding: 2rem 1.5rem 4rem;
-            }
-
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-
-            .ref-list {
-                column-count: 1;
-            }
-
-            .related-grid {
-                grid-template-columns: 1fr;
-            }
+            .sidebar .links { margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem 4rem; }
+            .hero h1 { font-size: 1.6rem; }
+            .ref-list { column-count: 1; }
+            .related-grid { grid-template-columns: 1fr; }
         }
 
         html { scroll-behavior: smooth; }
@@ -417,61 +406,82 @@
 </head>
 <body>
 
-<header class="header-bar">
-    <a href="../index.html" class="site-name">Xiaomeng Qiao — Research</a>
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst in training &middot; researcher &middot; writer</div>
+
     <nav>
-        <a href="../gentle-structure-lab/">Gentle Structure Lab</a>
-        <a href="https://xiaomengicp.github.io/buddhism-psychoanalysis-research/">Buddhism × Psychoanalysis</a>
-        <a href="../index.html">Main Hub</a>
+        <div class="nav-group">
+            <div class="nav-group-title">This Page</div>
+            <a href="#core-question">Core Question</a>
+            <a href="#research-site">Research Site</a>
+            <a href="#methodology">Methodology</a>
+            <a href="#findings">Findings</a>
+            <a href="#stages">Research Stages</a>
+            <a href="#publications">Publications</a>
+            <a href="#references">References</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Projects</div>
+            <a href="../index.html">&larr; Research Hub</a>
+            <a href="../gentle-structure-lab/">Gentle Structure Lab</a>
+            <a href="../buddhism-psychoanalysis-research/">Buddhism &times; Psychoanalysis</a>
+        </div>
     </nav>
-</header>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://psychoanalyticvibecoder.substack.com" target="_blank">PVC</a>
+    </div>
+</aside>
 
 <main class="main">
 
     <!-- Hero -->
     <section class="hero">
-        <a href="../index.html" class="back-link">&larr; Back to Research Hub</a>
         <h1>Psychoanalytic Literacy</h1>
         <div class="subtitle">How It Grows Outside the Clinic</div>
     </section>
 
     <!-- Core Question -->
+    <h2 id="core-question">Core Question</h2>
+
     <div class="core-question">
-        <p>The psychoanalytic field has never separated "literacy" from "training." This binding — education equals credentialing, understanding equals qualification — is itself a core symptom.</p>
+        <p>The psychoanalytic field has rarely separated "literacy" from "training." Understanding is bound to credentialing, education to qualification &mdash; a binding that deserves examination.</p>
         <p>This research programme names <em>psychoanalytic literacy</em> as an independent concept and investigates how it develops through multiple forms of practice.</p>
     </div>
 
     <!-- Research Site -->
-    <h2>Research Site</h2>
+    <h2 id="research-site">Research Site</h2>
 
-    <p><strong>何苦开心</strong> (hekukaixin) is a cultural-educational brand founded in 2020. Over six years it has grown into a multi-media ecology: 300+ original articles, courses with 260+ paid subscribers, AI-generated music albums, visual art, fiction, and games — all exploring how psychoanalytic understanding travels through different channels.</p>
+    <p><strong>&#20309;&#33510;&#24320;&#24515;</strong> (hekukaixin) is a cultural-educational brand founded in 2020. Over six years it has grown into a multi-media ecology: 300+ original articles, courses with 260+ paid subscribers, AI-generated music albums, visual art, fiction, and games &mdash; all exploring how psychoanalytic understanding travels through different channels.</p>
 
-    <p>The brand itself is the research site. Each piece of content is both a cultural product and a designed intervention within an iterative research cycle. This creates a rare condition: the researcher is simultaneously the designer, the practitioner, and the subject.</p>
+    <p>The brand itself is the research site. Each piece of content is both a cultural product and a designed intervention within an iterative research cycle &mdash; with the researcher simultaneously acting as designer, practitioner, and subject.</p>
 
     <!-- Methodology -->
-    <h2>Methodology</h2>
+    <h2 id="methodology">Methodology</h2>
 
     <div class="info-card">
         <h4>Design-Based Research (DBR) + Practice-as-Research (PaR)</h4>
         <div class="card-meta">+ Psychoanalytic Methodology + Multimodality</div>
-        <p>Each piece of content — an article, a song, a game, a course module — is a designed experience within an iterative research cycle. The methodology studies both <em>reception</em> (how audiences develop literacy through engagement) and <em>production</em> (how creative practice itself becomes working-through).</p>
-        <p>DBR provides the iterative design logic. PaR provides the framework for treating creative output as knowledge-generating practice. Psychoanalytic methodology — particularly Britzman's concept of "difficult knowledge" — grounds the theoretical orientation. Multimodality theory (Kress) enables comparison across media forms.</p>
+        <p>Each piece of content &mdash; an article, a song, a game, a course module &mdash; is a designed experience within an iterative research cycle. The methodology studies both <em>reception</em> (how audiences develop literacy through engagement) and <em>production</em> (how creative practice itself becomes working-through).</p>
+        <p>DBR provides the iterative design logic. PaR provides the framework for treating creative output as knowledge-generating practice. Psychoanalytic methodology &mdash; particularly Britzman's concept of "difficult knowledge" &mdash; grounds the theoretical orientation. Multimodality theory (Kress) enables comparison across media forms.</p>
     </div>
 
     <!-- Findings So Far -->
-    <h2>Findings So Far</h2>
+    <h2 id="findings">Findings So Far</h2>
 
     <div class="info-card">
         <h4>From coding of 36 reader responses across 3 data batches</h4>
         <div class="card-meta">Phronetic iterative analysis (Tracy, 2020) &middot; 18 first-level codes &middot; 7 second-level codes &middot; 7 analytic memos</div>
-        <p>Seven dimensions of psychoanalytic literacy have been identified from the data. These dimensions describe distinct cognitive and affective operations — not a single scale from "less" to "more" literate, but a cluster of qualitatively different capacities.</p>
-        <p><strong>"Loosening" (松动)</strong> has emerged as an underlying process across all dimensions. Loosening names the moment when a fixed frame of understanding begins to yield — not toward a correct answer, but toward the capacity to hold more than one thing at a time.</p>
+        <p>Seven dimensions of psychoanalytic literacy have been identified from the data. These dimensions describe distinct cognitive and affective operations &mdash; not a single scale from "less" to "more" literate, but a cluster of qualitatively different capacities.</p>
+        <p><strong>"Loosening" (&#26494;&#21160;)</strong> has emerged as an underlying process across all dimensions. Loosening names the moment when a fixed frame of understanding begins to yield &mdash; not toward a correct answer, but toward the capacity to hold more than one thing at a time.</p>
         <p>Paid and public spaces cultivate different <em>kinds</em> (not degrees) of literacy. This is a structural finding, not a marketing claim: the containment provided by a paid community produces qualitatively different responses than open-access writing.</p>
         <p class="detail">Two candidate dimensions are pending verification in the next data batch.</p>
     </div>
 
     <!-- Research Stages -->
-    <h2>Research Stages</h2>
+    <h2 id="stages">Research Stages</h2>
 
     <div class="stage-tracker">
         <div class="stage-track-line"></div>
@@ -481,9 +491,8 @@
             <div class="stage-label">Stage 1</div>
             <h4>Concept Naming</h4>
             <div class="stage-status">Coding done. Writing in progress.</div>
-            <p class="stage-desc"><strong>Output:</strong> Course paper (June 2026)</p>
             <p class="stage-desc"><strong>Research:</strong> Name the concept of psychoanalytic literacy. Establish the initial framework and dimensional structure from empirical coding.</p>
-            <p class="stage-desc"><strong>Practice:</strong> Findings are already informing course design and content strategy within 何苦开心.</p>
+            <p class="stage-desc"><strong>Practice:</strong> Findings are already informing course design and content strategy within &#20309;&#33510;&#24320;&#24515;.</p>
         </div>
 
         <div class="stage future">
@@ -491,9 +500,8 @@
             <div class="stage-label">Stage 2</div>
             <h4>Empirical Study Design</h4>
             <div class="stage-status">After Stage 1 completion.</div>
-            <p class="stage-desc"><strong>Output:</strong> McCary Fund grant proposal (August 2026)</p>
             <p class="stage-desc"><strong>Research:</strong> Operationalize the literacy dimensions identified in Stage 1. Design a formal empirical study with structured data collection.</p>
-            <p class="stage-desc"><strong>Practice:</strong> Evaluation framework for courses — a way to assess what different course designs actually cultivate.</p>
+            <p class="stage-desc"><strong>Practice:</strong> Evaluation framework for courses &mdash; a way to assess what different course designs actually cultivate.</p>
         </div>
 
         <div class="stage future">
@@ -501,7 +509,7 @@
             <div class="stage-label">Stage 3</div>
             <h4>Cross-Media Design Research</h4>
             <div class="stage-status">Planned.</div>
-            <p class="stage-desc"><strong>Research:</strong> Compare how psychoanalytic literacy develops across different media — text, music, games, courses. What design principles cultivate what kinds of literacy?</p>
+            <p class="stage-desc"><strong>Research:</strong> Compare how psychoanalytic literacy develops across different media &mdash; text, music, games, courses. What design principles cultivate what kinds of literacy?</p>
             <p class="stage-desc"><strong>Practice:</strong> Content strategy and course module redesign grounded in empirical findings. Crosses with Gentle Structure Lab.</p>
         </div>
 
@@ -510,18 +518,17 @@
             <div class="stage-label">Stage 4</div>
             <h4>Theory Construction</h4>
             <div class="stage-status">Long-term.</div>
-            <p class="stage-desc"><strong>Output:</strong> Book</p>
-            <p class="stage-desc"><strong>Research:</strong> A full theory of psychoanalytic literacy — how it develops, what cultivates it, and what it means for psychoanalytic education beyond the clinic.</p>
-            <p class="stage-desc"><strong>Practice:</strong> Teaching matrix systematized. The research programme's findings become the theoretical backbone of 何苦开心's educational design.</p>
+            <p class="stage-desc"><strong>Research:</strong> A full theory of psychoanalytic literacy &mdash; how it develops, what cultivates it, and what it means for psychoanalytic education beyond the clinic.</p>
+            <p class="stage-desc"><strong>Practice:</strong> Teaching matrix systematized. The research programme's findings become the theoretical backbone of &#20309;&#33510;&#24320;&#24515;'s educational design.</p>
         </div>
 
     </div>
 
     <!-- Related Publications -->
-    <h2>Related Publications</h2>
+    <h2 id="publications">Related Publications</h2>
 
     <h3>Production Side</h3>
-    <p style="font-size: 0.85rem; color: #5a6a7a; margin-bottom: 1rem;">These publications investigate the <em>production</em> dimension of psychoanalytic literacy — how creative practice becomes working-through.</p>
+    <p style="font-size: 0.85rem; color: #5a6a7a; margin-bottom: 1rem;">These publications investigate the <em>production</em> dimension of psychoanalytic literacy &mdash; how creative practice becomes working-through.</p>
 
     <ul class="pub-list">
         <li><span class="pub-tag production">production</span> Qiao, X. (2025). From Silence to Song: True Self-Emergence Through Creative Mourning. <em>Studies in Gender and Sexuality</em>, 26(4), 318-330.</li>
@@ -529,8 +536,13 @@
         <li><span class="pub-tag production">production</span> Qiao, X. (2025). AI Assisted Creation and Narcissistic Predicament. <em>APsaA Committee on AI Report</em>.</li>
     </ul>
 
+    <h3>Dissertation</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag dissertation">dissertation</span> Qiao, X. (2024). Nurturing the Creative Self: Creative Ambivalence and Narcissistic Vulnerability in a Chinese Online Community. <em>MA Psychoanalytic Research, The Tavistock and Portman NHS Foundation Trust</em>. (Unpublished)</li>
+    </ul>
+
     <!-- Key References -->
-    <h2>Key References</h2>
+    <h2 id="references">Key References</h2>
 
     <ul class="ref-list">
         <li>Britzman, D. (1998). <em>Lost Subjects, Contested Objects.</em></li>
@@ -545,7 +557,7 @@
     </ul>
 
     <!-- Related Projects -->
-    <h2>Related Projects</h2>
+    <h2 id="related-projects">Related Projects</h2>
 
     <div class="related-grid">
         <div class="related-item">
@@ -557,7 +569,7 @@
         </div>
         <div class="related-item">
             <div class="layer-label">Content Layer</div>
-            <a href="https://xiaomengicp.github.io/buddhism-psychoanalysis-research/">
+            <a href="../buddhism-psychoanalysis-research/">
                 <h4>Buddhism &#215; Psychoanalysis</h4>
             </a>
             <p>Systematic comparison of two systems of mind classification.</p>
@@ -578,6 +590,27 @@
     </div>
 
 </main>
+
+<script>
+    const sections = document.querySelectorAll('h2[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

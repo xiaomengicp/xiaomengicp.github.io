@@ -14,47 +14,84 @@
             line-height: 1.7;
         }
 
-        /* Header bar (replaces sidebar on sub-pages) */
-        .header-bar {
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 240px;
+            height: 100vh;
             background: #1c2a35;
             color: #c8d6df;
-            padding: 1.2rem 2.5rem;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
             display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            flex-direction: column;
         }
 
-        .header-bar .site-name {
-            font-size: 0.82rem;
+        .sidebar h1 {
+            font-size: 1.05rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.72rem;
             color: #8a9fb0;
-            text-decoration: none;
-            transition: color 0.2s;
-            letter-spacing: 0.02em;
+            margin-bottom: 2rem;
+            line-height: 1.5;
         }
 
-        .header-bar .site-name:hover {
-            color: #e8eff4;
+        .sidebar nav { margin-bottom: 1.5rem; flex: 1; }
+
+        .sidebar .nav-group {
+            margin-bottom: 1.2rem;
         }
 
-        .header-bar .page-title {
-            font-size: 1rem;
-            color: #e8eff4;
-            letter-spacing: 0.02em;
-        }
-
-        .header-bar .page-subtitle {
-            font-size: 0.82rem;
+        .sidebar .nav-group-title {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
             color: #5a7a8f;
-            margin-left: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Main content - single column */
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
+            text-decoration: none;
+            font-size: 0.78rem;
+            padding: 0.22rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            color: #e8eff4;
+        }
+
+        .sidebar .links {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.72rem;
+            margin-right: 0.7rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        /* Main content */
         .main {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 3rem 2.5rem 5rem;
+            margin-left: 240px;
+            padding: 3rem 3.5rem 5rem;
+            max-width: 920px;
         }
 
         /* Hero */
@@ -75,20 +112,9 @@
             margin-bottom: 1.5rem;
         }
 
-        .hero .back-link {
-            display: inline-block;
-            font-size: 0.82rem;
-            color: #5a7a8f;
-            text-decoration: none;
-            margin-bottom: 1.5rem;
-            transition: color 0.2s;
-        }
-
-        .hero .back-link:hover { color: #2d4a5e; }
-
         /* Headings */
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #1c2a35;
             margin-top: 3.5rem;
             margin-bottom: 1rem;
@@ -136,14 +162,12 @@
             line-height: 1.8;
         }
 
-        /* Lineage / intellectual context */
+        /* Lineage */
         .lineage-item {
             margin-bottom: 0.8rem;
         }
 
-        .lineage-item strong {
-            color: #1c2a35;
-        }
+        .lineage-item strong { color: #1c2a35; }
 
         .lineage-item .note {
             font-size: 0.85rem;
@@ -180,15 +204,8 @@
             vertical-align: top;
         }
 
-        .translation-table tbody tr:nth-child(even) {
-            background: #fafcfd;
-        }
-
-        .translation-table .arrow {
-            color: #5a7a8f;
-            text-align: center;
-            font-size: 0.85rem;
-        }
+        .translation-table tbody tr:nth-child(even) { background: #fafcfd; }
+        .translation-table .arrow { color: #5a7a8f; text-align: center; font-size: 0.85rem; }
 
         /* Product cards grid */
         .product-grid {
@@ -302,11 +319,9 @@
             justify-content: center;
         }
 
-        .principles-list li strong {
-            color: #1c2a35;
-        }
+        .principles-list li strong { color: #1c2a35; }
 
-        /* Stage timeline / progress tracker */
+        /* Stage timeline */
         .stage-tracker {
             margin: 2rem 0;
             position: relative;
@@ -328,9 +343,7 @@
             margin-bottom: 2rem;
         }
 
-        .stage-item:last-child {
-            margin-bottom: 0;
-        }
+        .stage-item:last-child { margin-bottom: 0; }
 
         .stage-dot {
             position: absolute;
@@ -407,7 +420,7 @@
         .stage-status.upcoming { color: #2d4a5e; }
         .stage-status.future { color: #8a9fb0; }
 
-        /* Recursion callout */
+        /* Callout */
         .callout {
             border-left: 3px solid #5a7a8f;
             padding: 1rem 1.5rem;
@@ -444,21 +457,43 @@
             margin-bottom: 0;
         }
 
-        /* Related projects */
-        .related-links {
-            list-style: none;
-            margin: 1rem 0;
+        /* Related projects grid */
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
         }
 
-        .related-links li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f3f5;
-            font-size: 0.88rem;
+        .related-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: #f5f8fa;
+            border: 1px solid #e0e6eb;
+            transition: border-color 0.2s;
         }
 
-        .related-links li .link-desc {
+        .related-item:hover { border-color: #c0d0da; }
+
+        .related-item a { border-bottom: none; }
+
+        .related-item .layer-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5a7a8f;
+            margin-bottom: 0.4rem;
+        }
+
+        .related-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin-bottom: 0.3rem;
+        }
+
+        .related-item p {
+            font-size: 0.78rem;
             color: #5a6a7a;
-            font-size: 0.82rem;
         }
 
         /* Footer */
@@ -488,15 +523,17 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header-bar {
-                padding: 1rem 1.5rem;
-                flex-direction: column;
-                gap: 0.2rem;
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 1.5rem;
             }
-            .header-bar .page-subtitle { margin-left: 0; }
-            .main { padding: 2rem 1.5rem; }
+            .sidebar .links { margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem; }
             .product-grid { grid-template-columns: 1fr; }
             .method-grid { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
             .translation-table { font-size: 0.8rem; }
             .translation-table th,
             .translation-table td { padding: 0.5rem 0.6rem; }
@@ -507,26 +544,46 @@
 </head>
 <body>
 
-<!-- Header bar -->
-<header class="header-bar">
-    <a href="../index.html" class="site-name">Xiaomeng Qiao — Research</a>
-    <div>
-        <span class="page-title">Gentle Structure Lab</span>
-        <span class="page-subtitle">Technology as Containment</span>
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst in training &middot; researcher &middot; writer</div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">This Page</div>
+            <a href="#core-question">Core Question</a>
+            <a href="#lineage">Intellectual Lineage</a>
+            <a href="#translation">Clinical &rarr; Design</a>
+            <a href="#products">Products</a>
+            <a href="#methodology">Methodology</a>
+            <a href="#principles">Design Principles</a>
+            <a href="#stages">Research Stages</a>
+            <a href="#companion">Companion Writing</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Projects</div>
+            <a href="../index.html">&larr; Research Hub</a>
+            <a href="../psychoanalytic-literacy/">Psychoanalytic Literacy</a>
+            <a href="../buddhism-psychoanalysis-research/">Buddhism &times; Psychoanalysis</a>
+        </div>
+    </nav>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://psychoanalyticvibecoder.substack.com" target="_blank">PVC</a>
     </div>
-</header>
+</aside>
 
 <main class="main">
 
     <!-- Hero -->
     <section class="hero">
-        <a href="../index.html" class="back-link">&larr; Back to Research Hub</a>
         <h1>Gentle Structure Lab</h1>
         <div class="tagline">Technology as Containment</div>
     </section>
 
     <!-- Core Question -->
-    <h2>Core Question</h2>
+    <h2 id="core-question">Core Question</h2>
 
     <div class="core-question">
         <p>What structural features of technology design create the experience of being contained &mdash; held? How can psychoanalytic thinking become not just content distributed through technology, but structure built into the medium itself?</p>
@@ -535,7 +592,7 @@
     <p>The Gentle Structure Lab investigates how software design and AI can support processes of working through without controlling them. It asks what happens when the design principles come not from UX conventions or behavioural psychology, but from clinical psychoanalytic practice &mdash; from the experience of what it means to hold someone while they think.</p>
 
     <!-- Intellectual Lineage -->
-    <h2>Intellectual Lineage</h2>
+    <h2 id="lineage">Intellectual Lineage</h2>
 
     <p>This programme draws on a specific constellation of thinkers who have each, in different ways, asked what technology <em>could</em> be:</p>
 
@@ -552,14 +609,14 @@
         <p><strong>Ian Bogost</strong> &mdash; procedural rhetoric. Systems make arguments through their rules, not just through their text or images.</p>
     </div>
 
-    <h3>The Empty Position</h3>
+    <h3>An Under-Explored Intersection</h3>
 
-    <p>There are technologists who think philosophically. There are psychoanalysts who write about technology. There are designers who invoke "empathy." But there is an empty position at the intersection of clinical practice, theoretical framework, and technical building &mdash; nobody occupies this combination. In psychoanalysis specifically, nobody has asked: <em>what would technology designed by psychoanalytic principles look like?</em></p>
+    <p>There are technologists who think philosophically. There are psychoanalysts who write about technology. There are designers who invoke "empathy." But the intersection of active clinical practice, psychoanalytic theory, and hands-on technical building remains under-explored. This programme works from that intersection, asking: <em>what would technology designed from psychoanalytic clinical experience look like?</em></p>
 
     <!-- Core Insight: Translation Table -->
-    <h2>The Core Insight &mdash; Clinical Methods as Design Methods</h2>
+    <h2 id="translation">The Core Insight &mdash; Clinical Methods as Design Methods</h2>
 
-    <p>The central contribution of this programme is a systematic translation of clinical psychoanalytic methods into software design principles. The clinical situation already knows how to hold someone through difficult thinking. The question is whether that knowledge can be structurally encoded.</p>
+    <p>The guiding hypothesis of this programme is that clinical psychoanalytic methods can be systematically translated into software design principles. The clinical situation already knows how to hold someone through difficult thinking. The question is whether that knowledge can be structurally encoded &mdash; and what is lost or gained in translation.</p>
 
     <table class="translation-table">
         <thead>
@@ -603,10 +660,10 @@
         </tbody>
     </table>
 
-    <p>Each row represents not an analogy but a structural translation: the same function, performed in a different medium. The research investigates which translations hold and which break down &mdash; and what the breakdowns reveal about both psychoanalytic theory and technology design.</p>
+    <p>Each row represents a proposed structural translation: the same function, attempted in a different medium. The research investigates which of these translations hold, which break down, and what the breakdowns reveal about both psychoanalytic theory and technology design.</p>
 
     <!-- Products as Experiments -->
-    <h2>Products as Experiments</h2>
+    <h2 id="products">Products as Experiments</h2>
 
     <p>Each product is a research site &mdash; a designed experiment testing whether specific clinical principles can be structurally encoded in software.</p>
 
@@ -616,7 +673,7 @@
             <div class="card-type">Writing Tool</div>
             <p>Container-oriented design for academic and reflective writing. AI assists structure and reflection; the user's text remains untouched.</p>
             <div class="finding">Key finding: rigor vs. judgment tension in LLM mode switching.</div>
-            <span class="status-badge active">Phase 1 complete &middot; 2 paying users</span>
+            <span class="status-badge active">Phase 1 complete</span>
         </div>
         <div class="product-card">
             <h4>Enough Today</h4>
@@ -639,7 +696,7 @@
     </div>
 
     <!-- Methodology -->
-    <h2>Methodology</h2>
+    <h2 id="methodology">Methodology</h2>
 
     <div class="method-grid">
         <div class="method-card">
@@ -665,7 +722,7 @@
     </div>
 
     <!-- Container-Oriented Design Principles -->
-    <h2>Container-Oriented Design Principles</h2>
+    <h2 id="principles">Container-Oriented Design Principles</h2>
 
     <p>Current working principles, derived primarily from Palimpsest development. These are provisional &mdash; the research programme is designed to test, refine, and extend them.</p>
 
@@ -679,7 +736,7 @@
     </ol>
 
     <!-- Research Stages -->
-    <h2>Research Stages</h2>
+    <h2 id="stages">Research Stages</h2>
 
     <div class="stage-tracker">
         <div class="stage-item">
@@ -720,31 +777,40 @@
     </div>
 
     <!-- Companion Substack -->
-    <h2>Companion Writing</h2>
+    <h2 id="companion">Companion Writing</h2>
 
     <div class="companion-block">
-        <h4>A Psychoanalytic Vibe Coder</h4>
+        <h4><a href="https://psychoanalyticvibecoder.substack.com" target="_blank">A Psychoanalytic Vibe Coder</a></h4>
         <div class="card-meta">Substack &middot; reflective writing alongside building</div>
         <p>Not documentation and not marketing &mdash; but reflective writing that runs alongside the building process. Each piece asks: what am I learning about psychoanalysis by trying to encode it in software? What am I learning about software by approaching it psychoanalytically?</p>
     </div>
 
     <!-- Related Projects -->
-    <h2>Related Projects</h2>
+    <h2 id="related-projects">Related Projects</h2>
 
-    <ul class="related-links">
-        <li>
-            <a href="../psychoanalytic-literacy/">Psychoanalytic Literacy</a>
-            <span class="link-desc"> &mdash; the education layer. How psychoanalytic understanding grows through reading, creating, and being held.</span>
-        </li>
-        <li>
-            <a href="https://xiaomengicp.github.io/buddhism-psychoanalysis-research/">Buddhism &times; Psychoanalysis</a>
-            <span class="link-desc"> &mdash; the content layer. Systematic comparative conceptual analysis between Buddhist and psychoanalytic frameworks.</span>
-        </li>
-        <li>
-            <a href="../index.html">Research Hub</a>
-            <span class="link-desc"> &mdash; all research programmes, publications, and creative practice.</span>
-        </li>
-    </ul>
+    <div class="related-grid">
+        <div class="related-item">
+            <div class="layer-label">Education Layer</div>
+            <a href="../psychoanalytic-literacy/">
+                <h4>Psychoanalytic Literacy</h4>
+            </a>
+            <p>How psychoanalytic understanding grows through reading, creating, and being held.</p>
+        </div>
+        <div class="related-item">
+            <div class="layer-label">Content Layer</div>
+            <a href="../buddhism-psychoanalysis-research/">
+                <h4>Buddhism &#215; Psychoanalysis</h4>
+            </a>
+            <p>Systematic comparison of two systems of mind classification.</p>
+        </div>
+        <div class="related-item">
+            <div class="layer-label">All Research</div>
+            <a href="../index.html">
+                <h4>Research Hub</h4>
+            </a>
+            <p>Full overview of research programmes and publications.</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <div class="footer">
@@ -753,6 +819,27 @@
     </div>
 
 </main>
+
+<script>
+    const sections = document.querySelectorAll('h2[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
