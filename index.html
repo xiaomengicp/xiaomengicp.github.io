@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xiaomeng Qiao — Research</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #1c2a35;
+            color: #c8d6df;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar h1 {
+            font-size: 1.15rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.78rem;
+            color: #8a9fb0;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .sidebar nav { margin-bottom: 2rem; }
+
+        .sidebar .nav-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .sidebar .nav-group-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            color: #e8eff4;
+        }
+
+        .sidebar .links {
+            position: absolute;
+            bottom: 2rem;
+            left: 1.5rem;
+            right: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        /* Main content */
+        .main {
+            margin-left: 260px;
+            padding: 3rem 4rem 5rem;
+            max-width: 960px;
+        }
+
+        .main h2 {
+            font-size: 1.6rem;
+            color: #1c2a35;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        .main h2:first-child { margin-top: 0; }
+
+        .main h3 {
+            font-size: 1.1rem;
+            color: #2d4a5e;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .main p {
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+        }
+
+        .main a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+            transition: border-color 0.2s;
+        }
+
+        .main a:hover { border-color: #2d4a5e; }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #1c2a35;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.05rem;
+            color: #5a7a8f;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            color: #4a4a4a;
+            max-width: 640px;
+        }
+
+        /* Programme cards */
+        .programme-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .programme-card {
+            border: 1px solid #d8e2e9;
+            border-left: 3px solid #2d4a5e;
+            padding: 1.5rem;
+            background: #fafcfd;
+        }
+
+        .programme-card h4 {
+            font-size: 1rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .programme-card .card-meta {
+            font-size: 0.78rem;
+            color: #5a7a8f;
+            margin-bottom: 0.6rem;
+        }
+
+        .programme-card p {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .programme-card .status {
+            font-size: 0.75rem;
+            color: #2d4a5e;
+            font-style: italic;
+        }
+
+        /* Three foundations */
+        .foundations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .foundation-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: #f5f8fa;
+            border: 1px solid #e0e6eb;
+        }
+
+        .foundation-item .layer-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .foundation-item h4 {
+            font-size: 0.95rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .foundation-item p {
+            font-size: 0.8rem;
+            color: #5a6a7a;
+        }
+
+        /* Publication list */
+        .pub-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .pub-list li {
+            font-size: 0.88rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f3f5;
+            color: #3a3a3a;
+        }
+
+        .pub-list li em { color: #5a6a7a; }
+
+        .pub-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 2px;
+            margin-right: 0.3rem;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .pub-tag.published { background: #e6f3e6; color: #2a6a2a; }
+        .pub-tag.accepted { background: #e8eef6; color: #2d4a5e; }
+        .pub-tag.invited { background: #f5f0e6; color: #7a6030; }
+        .pub-tag.award { background: #f5e6f0; color: #6a2d5e; }
+        .pub-tag.professional { background: #eff0f0; color: #4a4a4a; }
+
+        /* Creative grid */
+        .creative-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .creative-item {
+            padding: 1.2rem;
+            border: 1px solid #e0e6eb;
+            background: #fafcfd;
+        }
+
+        .creative-item h4 {
+            font-size: 0.95rem;
+            color: #1c2a35;
+            margin-bottom: 0.3rem;
+        }
+
+        .creative-item .medium {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #5a7a8f;
+            margin-bottom: 0.4rem;
+        }
+
+        .creative-item p {
+            font-size: 0.85rem;
+            color: #5a6a7a;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 1.5rem 0;
+            border-left: 2px solid #d8e2e9;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.4rem;
+            width: 8px;
+            height: 8px;
+            background: #2d4a5e;
+            border-radius: 50%;
+        }
+
+        .timeline-item .year {
+            font-size: 0.75rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .timeline-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin: 0.2rem 0;
+        }
+
+        .timeline-item p {
+            font-size: 0.83rem;
+            color: #5a6a7a;
+        }
+
+        /* About */
+        .about-text {
+            max-width: 600px;
+        }
+
+        .about-text p {
+            font-size: 0.92rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 1.5rem;
+            }
+            .sidebar .links { position: relative; bottom: auto; left: auto; margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem; }
+            .foundations { grid-template-columns: 1fr; }
+            .creative-grid { grid-template-columns: 1fr; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst · researcher · writer</div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">Overview</div>
+            <a href="#research-vision">Research Vision</a>
+            <a href="#foundations">Three Foundations</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Research Programmes</div>
+            <a href="#psychoanalytic-literacy">Psychoanalytic Literacy</a>
+            <a href="#buddhism-psychoanalysis">Buddhism × Psychoanalysis</a>
+            <a href="#gentle-structure-lab">Gentle Structure Lab</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Other Lines</div>
+            <a href="#chinese-subjectivity">Chinese Subjectivity</a>
+            <a href="#gender-trans">Gender &amp; Trans</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Practice &amp; Output</div>
+            <a href="#creative-practice">Creative Practice</a>
+            <a href="#practice-timeline">Practice Timeline</a>
+            <a href="#publications">Publications</a>
+        </div>
+        <div class="nav-group">
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://xiaomengicp.github.io/buddhism-psychoanalysis-research/" target="_blank">Buddhism Lab</a>
+    </div>
+</aside>
+
+<main class="main">
+
+    <!-- Hero -->
+    <section class="hero" id="research-vision">
+        <h1>Research</h1>
+        <div class="tagline">How does psychoanalytic understanding grow — in people, through practice, across media?</div>
+        <p>I am a practicing psychoanalyst, and clinical work is the ground from which everything else grows. My research asks how psychoanalytic literacy develops outside institutional training — through writing, teaching, music, games, and technology. I work at the intersection of psychoanalysis, education, Chinese culture, gender, Buddhism, and creative practice. Everything I do is, in one way or another, an attempt to understand how subjects form, resist, and create themselves through processes of translation.</p>
+    </section>
+
+    <!-- Three Foundations -->
+    <h2 id="foundations">Three Foundational Programmes</h2>
+    <p>Three research programmes form the foundation of my work. They address the same question — how psychoanalytic understanding grows — from three different angles.</p>
+
+    <div class="foundations">
+        <div class="foundation-item">
+            <div class="layer-label">Education Layer</div>
+            <h4>Psychoanalytic Literacy</h4>
+            <p>How people learn to think psychoanalytically — through reading, creating, and being held.</p>
+        </div>
+        <div class="foundation-item">
+            <div class="layer-label">Content Layer</div>
+            <h4>Buddhism ×<br>Psychoanalysis</h4>
+            <p>What two independent systems of mind classification see — and don't see — about each other.</p>
+        </div>
+        <div class="foundation-item">
+            <div class="layer-label">Structure Layer</div>
+            <h4>Gentle Structure Lab</h4>
+            <p>How technology, design, and AI can support working through without controlling it.</p>
+        </div>
+    </div>
+
+    <!-- Psychoanalytic Literacy -->
+    <h2 id="psychoanalytic-literacy">Psychoanalytic Literacy</h2>
+    <h3>How It Grows Outside the Clinic</h3>
+
+    <p>The psychoanalytic field has never separated "literacy" from "training." This binding — education equals credentialing, understanding equals qualification — is itself a core symptom. My research programme names <em>psychoanalytic literacy</em> as an independent concept and investigates how it develops through multiple forms of practice.</p>
+
+    <p>The research site is <strong>何苦开心</strong> (hékǔkāixīn), a cultural-educational brand I founded in 2020. Over six years, it has grown into a multi-media ecology: 300+ articles, courses with 260+ subscribers, AI-generated music albums, visual art, fiction, and games — all exploring how psychoanalytic understanding travels through different channels.</p>
+
+    <div class="programme-card">
+        <h4>Method</h4>
+        <div class="card-meta">Design-Based Research + Practice-as-Research + Psychoanalytic Methodology</div>
+        <p>Each piece of content — an article, a song, a game — is a designed experience within an iterative research cycle. I study both how audiences develop literacy (<em>reception</em>) and how creative practice itself becomes working-through (<em>production</em>).</p>
+        <div class="status">Key references: Brown (1992), McKenney & Reeves (2019), Sandoval (2014), Britzman (1998), Kress (2010)</div>
+    </div>
+
+    <div class="programme-card">
+        <h4>Findings So Far</h4>
+        <div class="card-meta">From coding of 36 reader responses across 3 data batches</div>
+        <p>Seven dimensions of psychoanalytic literacy identified, plus "loosening" as an underlying process across all dimensions. Independent analytic thinking is not a single capacity but a cluster of at least seven cognitive operations. Paid and public spaces cultivate different <em>kinds</em> (not degrees) of literacy.</p>
+        <div class="status">Phronetic iterative analysis (Tracy, 2020) · 18 first-level codes · 7 second-level codes · 7 analytic memos</div>
+    </div>
+
+    <p style="font-size: 0.85rem; color: #5a7a8f; margin-top: 1rem;">Current outputs: course paper (June 2026) → ROOM Magazine → McCary Fund grant proposal (August 2026)</p>
+
+    <!-- Buddhism × Psychoanalysis -->
+    <h2 id="buddhism-psychoanalysis">Buddhism × Psychoanalysis</h2>
+    <h3>Systematic Comparative Conceptual Analysis</h3>
+
+    <p>A systematic comparison between the 51 mental factors (<em>心所法</em>) of the Yogācāra <em>Treatise on the Hundred Dharmas</em> and psychoanalytic affect theory. Not "Buddhism and psychoanalysis are similar," but: what does each system see that the other doesn't?</p>
+
+    <div class="programme-card">
+        <h4>Method</h4>
+        <div class="card-meta">Gadamerian hermeneutic dialogue · Six-dimension coding framework</div>
+        <p>For each mental factor: Buddhist definition, nearest psychoanalytic concept, points of correspondence, points of tension, blind spots, and experiential verification from dual practice (meditation + clinical work).</p>
+    </div>
+
+    <div class="programme-card">
+        <h4>Pilot Finding: Greed (貪)</h4>
+        <div class="card-meta">Completed May 2026</div>
+        <p>Greed and libido describe the same phenomenon (adhesive movement toward an object) but at different ontological levels: greed targets existence itself; libido targets specific relational objects. Their epistemological positions are fundamentally opposed — greed <em>is</em> suffering; libido <em>is</em> vitality.</p>
+    </div>
+
+    <p style="font-size: 0.85rem; color: #5a7a8f; margin-top: 1rem;">
+        Phase 1: six root afflictions (貪嗔痴慢疑不正見) · First paper: "Clearing the Ground" → <em>Contemporary Buddhism</em><br>
+        <a href="https://xiaomengicp.github.io/buddhism-psychoanalysis-research/" target="_blank">→ Project hub with full progress tracker</a>
+    </p>
+
+    <!-- Gentle Structure Lab -->
+    <h2 id="gentle-structure-lab">Gentle Structure Lab</h2>
+    <h3>Technology, Design, and AI for Psychoanalytic Practice</h3>
+
+    <p><em>Gentle structure</em> — structure that holds without controlling — is the unifying design principle across 何苦开心's products. This programme investigates how technology, software design, and AI agents can support the process of working through at scale. It sits at the intersection of psychoanalytic thinking and tool-building: not "how do we digitise therapy," but how do we design systems whose structure is itself therapeutic?</p>
+
+    <p>This is the most emergent of the three foundational programmes — the principle is clear, the product directions are taking shape.</p>
+
+    <p style="font-size: 0.85rem; color: #5a7a8f;">Products in development: Palimpsest (AI-assisted writing tool), 博雅精神分析 course system (260+ subscribers, launched February 2026), agent architectures for one-person cultural brands.</p>
+
+    <!-- Chinese Subjectivity -->
+    <h2 id="chinese-subjectivity">Chinese Subjectivity</h2>
+    <h3>Psychoanalytic Approaches to Chinese Experience</h3>
+
+    <p>A sustained programme investigating Chinese subjectivity through psychoanalytic theory — from the formation of the unconscious in specific cultural-historical conditions to the contemporary psychoanalytic scene in China. This line includes my doctoral dissertation, ongoing publication work, and the <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">Chinese Psychoanalytic Scene (CPS)</a> Substack.</p>
+
+    <div class="programme-card">
+        <h4>The Drifting Subject (Dissertation)</h4>
+        <div class="card-meta">PsyaD · Boston Graduate School of Psychoanalysis</div>
+        <p>Using Laplanche's general theory of seduction to investigate Chinese subjectivity. Six layers of "growth rings" — tradition, colonial modernity, revolutionary trauma, family, capitalism, state — each depositing enigmatic messages that the subject must translate. The argument centres on <em>refusal to translate</em> as a mode of subject formation: defensive refusal ("not this"), creative refusal (finding one's own codes), and the mourning required to move between them.</p>
+    </div>
+
+    <div class="programme-card">
+        <h4>Shidafu and Narcissistic Structure</h4>
+        <div class="card-meta">Depth hermeneutics · Kohut's selfobject theory</div>
+        <p>Reading the <em>shidafu</em> (士大夫) position as a narcissistic regulation structure maintained through three selfobject functions (idealising, mirroring, twinship), and analysing modernisation as the collapse of these structural conditions rather than an intellectual transformation. In dialogue with 余英時, Metzger (1977), Levenson, De Bary.</p>
+    </div>
+
+    <p style="font-size: 0.85rem; color: #5a7a8f;">Published work in this line: narcissistic vulnerability in Chinese masculinity, the relational and social unconscious in clinical cases, social media and mental health discourse in China, and mother archetypes in Chinese cultural narratives.</p>
+
+    <!-- Gender & Trans -->
+    <h2 id="gender-trans">Gender, Queerness, and Trans Experience</h2>
+
+    <p>A sustained line of work examining transgender experience, queer subjectivity, and gender as enigmatic message — primarily through Laplanche, Ferenczi, and Saketopoulou. Published work includes transgender selfhood in the Chinese context, creative mourning through music, and the structural condition of transgender non-existence ("existence tax"). This line runs through both academic writing and creative practice.</p>
+
+    <div class="programme-card">
+        <h4>Key Publications</h4>
+        <p>"Becoming Myself: Transgender Authentic Selfhood in the Chinese Context" (<em>Psychoanalytic Inquiry</em>, 2026) · "From Silence to Song: True Self-Emergence Through Creative Mourning" (<em>Studies in Gender and Sexuality</em>, 2025) · "Ghostly Persistence: Disavowal, Remainder, and the Indigestible Queer Subject in China" (<em>J. of LGBTQ+ Mental Health</em>, forthcoming, Outstanding Trainee Paper Award)</p>
+    </div>
+
+    <!-- Creative Practice -->
+    <h2 id="creative-practice">Creative Practice</h2>
+    <p>Creative work runs across all research lines. Making things — fiction, music, visual art, games — is not illustration of theory but a form of working through in its own right.</p>
+
+    <div class="creative-grid">
+        <div class="creative-item">
+            <h4>QPHU</h4>
+            <div class="medium">Fiction · 2025–</div>
+            <p>A novel series deeply entangled with psychoanalytic thinking. Book 1 publishing; Book 2 drafted.</p>
+        </div>
+        <div class="creative-item">
+            <h4>精神分析百鬼図</h4>
+            <div class="medium">AI Visual Art · 2022–2025</div>
+            <p>Psychoanalytic ghost stories through AI-generated imagery. Three visual zines on themes of trauma, the zombie mother, and the transgender body.</p>
+        </div>
+        <div class="creative-item">
+            <h4>Enough</h4>
+            <div class="medium">AI Music · 2025</div>
+            <p>An album on transgender experience and creative mourning. Companion to the published paper "From Silence to Song."</p>
+        </div>
+        <div class="creative-item">
+            <h4>Emotional Device 404</h4>
+            <div class="medium">AI Music · 2025</div>
+            <p>A psychoanalytic album exploring schizoid experience and trauma through sound.</p>
+        </div>
+        <div class="creative-item">
+            <h4>Games</h4>
+            <div class="medium">Interactive · 2026–</div>
+            <p>Experimental games exploring dissociation, trauma, and psychoanalytic concepts through interactive experience.</p>
+        </div>
+        <div class="creative-item">
+            <h4>Buddhist Trilogy</h4>
+            <div class="medium">Autobiographical Fiction · planned</div>
+            <p>《我佛》《師子》《法身》— Three volumes on Buddhist practice, identity, and embodiment.</p>
+        </div>
+    </div>
+
+    <!-- Practice Timeline -->
+    <h2 id="practice-timeline">Practice Timeline</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="year">2020</div>
+            <h4>何苦开心 founded</h4>
+            <p>WeChat public account launched during COVID. Psychoanalytic writing for general audiences. Now 300+ original articles, 20,000+ readers.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2021</div>
+            <h4>Podcast《清醒梦》</h4>
+            <p>30+ episodes exploring psychoanalytic thinking in everyday life. Paused after one year.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2022</div>
+            <h4>精神分析百鬼図 begins</h4>
+            <p>AI-generated visual art series combining psychoanalysis, trauma, and ghost imagery. Continued through 2025; exhibited and published as three zines.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2024</div>
+            <h4>Trauma-informed paid column</h4>
+            <p>Structured psychoanalytic education through a paid subscription column. Precursor to 博雅精神分析.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2025</div>
+            <h4>Music albums · QPHU · Academic publications</h4>
+            <p>Two AI music albums (<em>Enough</em>, <em>Emotional Device 404</em>), the QPHU novel series began. Six peer-reviewed papers published across psychoanalysis, gender, and Chinese studies. Four academic awards.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2026</div>
+            <h4>博雅精神分析 launched · Research programmes formalised</h4>
+            <p>博雅精神分析 subscription course launched (February; 260+ paid members). Game development begins. Buddhism × Psychoanalysis and Psychoanalytic Literacy established as formal research programmes.</p>
+        </div>
+    </div>
+
+    <!-- Publications -->
+    <h2 id="publications">Publications</h2>
+
+    <h3>Peer-Reviewed Publications</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag published">published</span> Qiao, X. (2026). Becoming Myself: Transgender Authentic Selfhood in the Chinese Context and Transgender Self-Experience. <em>Psychoanalytic Inquiry</em>, 47(5).</li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). From Silence to Song: True Self-Emergence Through Creative Mourning. <em>Studies in Gender and Sexuality</em>, 26(4), 318–330.</li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). Deprivation and disruption: The development of narcissistic vulnerability and toxic masculinity in some Chinese contexts. <em>Psychoanalysis, Self and Context</em>, 20(2), 237–253.</li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). Gaming the unconscious: The relational and social unconscious in a contemporary Chinese case study. <em>Psychoanalysis and Psychotherapy in China</em>, 8(1–2), 14–24.</li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). The role of social media in shaping mental health discourse: A case study of China's psychoanalysis and counselling narratives. <em>Psychoanalysis and Psychotherapy in China</em>, 8(1–2), 115–125.</li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2024). Mother archetypes in Chinese cultural narratives: A psychoanalytic perspective. <em>Psychoanalysis and Psychotherapy in China</em>, 7(1–2), 139–153.</li>
+    </ul>
+
+    <h3>Accepted / Forthcoming</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag accepted">accepted</span> Qiao, X. (forthcoming). Ghostly Persistence: Disavowal, Remainder, and the Indigestible Queer Subject in China. <em>Journal of LGBTQ+ Mental Health</em>.</li>
+        <li><span class="pub-tag accepted">accepted</span> Qiao, X. (forthcoming). Self-Hollowing: Ghosts Within Ourselves. <em>Psychoanalysis, Self and Context</em>.</li>
+        <li><span class="pub-tag accepted">accepted</span> Qiao, X. (forthcoming). Oedipal Variations in Chinese Luoshan Motif. <em>Psychoanalysis and Psychotherapy in China</em>.</li>
+    </ul>
+
+    <h3>Invited / Commissioned</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag invited">invited</span> Qiao, X. (invited). Confusion of Tongues in the Chinese Context. <em>Psychoanalytic Inquiry</em> (journal commission).</li>
+        <li><span class="pub-tag invited">invited</span> Qiao, X. (invited). Chapter in <em>Radicalising Contemporary Psychoanalysis: Theories and Tools for Resistance</em> (edited volume).</li>
+        <li><span class="pub-tag invited">invited</span> Qiao, X. (invited). Article for special issue "Psychoanalysis, Politics, and Public Humanities." <em>Humanities</em>.</li>
+    </ul>
+
+    <h3>Awards</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag award">award</span> 2026 Outstanding Trainee Paper Award, <em>Journal of LGBTQ+ Mental Health</em></li>
+        <li><span class="pub-tag award">award</span> 2025 Ralph Roughton Paper Award (Runner-up), APsaA Committee on Gender &amp; Sexuality</li>
+        <li><span class="pub-tag award">award</span> 2025 Gender, Sexuality, LGBTQ+ Essay Award, ICPLA</li>
+        <li><span class="pub-tag award">award</span> 2024 Erika Schmidt Essay Prize (First Prize), Chicago Psychoanalytic Institute</li>
+    </ul>
+
+    <h3>Professional Publications</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). What School Are You? <em>The American Psychoanalyst</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). Between Worlds: A Chinese Analyst's Journey. <em>Room: A Sketchbook for Analytic Action</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). The Inner Negotiator: AI as Transitional Object and Echo in the Treatment of Complex Trauma. <em>APsaA Committee on AI Report</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). Between Two Names. <em>The American Psychoanalyst</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). The Shadow of the Dead Mother. <em>The American Psychoanalyst</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). The Seen and the Unseen: AI's Disquieting Impact. <em>Room: A Sketchbook for Analytic Action</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). AI Assisted Creation and Narcissistic Predicament. <em>APsaA Committee on AI Report</em>.</li>
+    </ul>
+
+    <h3>Book Translation</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag accepted">forthcoming</span> Qiao, X. (2027). <em>Dear Candidate: Analysts from around the World Offer Personal Reflections on Psychoanalytic Training, Education, and the Profession</em> [Chinese translation]. Wanqian Xinli Press.</li>
+    </ul>
+
+    <!-- About -->
+    <h2 id="about">About</h2>
+    <div class="about-text">
+        <p><strong>Xiaomeng Qiao</strong> is a practicing psychoanalyst and doctoral student (PsyaD in Psychoanalysis, Society and Culture) at the Boston Graduate School of Psychoanalysis, currently based in the United Kingdom. He is a candidate of the International Psychoanalytical Association (IPA) and the American Psychoanalytic Association (APsaA), and serves on the APsaA President's Commission on Artificial Intelligence and the Committee on Gender and Sexuality.</p>
+        <p>Clinical work is the foundation of all his research and creative output. His doctoral research uses Laplanche's translation theory to investigate Chinese subjectivity, examining how cultural, colonial, and political formations shape unconscious life. He is the founder of 何苦开心 (hékǔkāixīn), a cultural-educational brand bringing psychoanalytic thinking to Chinese-speaking audiences through writing, courses, music, visual art, and games.</p>
+        <p>He writes <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">Chinese Psychoanalytic Scene</a> on Substack and develops creative projects — fiction, AI-generated music and visual art, and experimental games — as forms of psychoanalytic practice and working through.</p>
+        <p style="font-size: 0.85rem; color: #5a7a8f; margin-top: 1.5rem;">Contact: xiaomeng.qiao.ayame9joe@gmail.com</p>
+    </div>
+
+</main>
+
+<script>
+    // Active nav on scroll
+    const sections = document.querySelectorAll('h2[id], section[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
