@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentle Structure Lab — Xiaomeng Qiao</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        /* Header bar (replaces sidebar on sub-pages) */
+        .header-bar {
+            background: #1c2a35;
+            color: #c8d6df;
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .header-bar .site-name {
+            font-size: 0.82rem;
+            color: #8a9fb0;
+            text-decoration: none;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
+        }
+
+        .header-bar .site-name:hover {
+            color: #e8eff4;
+        }
+
+        .header-bar .page-title {
+            font-size: 1rem;
+            color: #e8eff4;
+            letter-spacing: 0.02em;
+        }
+
+        .header-bar .page-subtitle {
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            margin-left: 0.6rem;
+        }
+
+        /* Main content - single column */
+        .main {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3rem 2.5rem 5rem;
+        }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.05rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .back-link {
+            display: inline-block;
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .hero .back-link:hover { color: #2d4a5e; }
+
+        /* Headings */
+        h2 {
+            font-size: 1.5rem;
+            color: #1c2a35;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #2d4a5e;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        /* Body text */
+        p {
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+            font-size: 0.95rem;
+        }
+
+        a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+            transition: border-color 0.2s;
+        }
+
+        a:hover { border-color: #2d4a5e; }
+
+        /* Core question block */
+        .core-question {
+            border-left: 3px solid #2d4a5e;
+            padding: 1.5rem;
+            background: #fafcfd;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .core-question p {
+            font-size: 1rem;
+            color: #1c2a35;
+            margin-bottom: 0;
+            line-height: 1.8;
+        }
+
+        /* Lineage / intellectual context */
+        .lineage-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .lineage-item strong {
+            color: #1c2a35;
+        }
+
+        .lineage-item .note {
+            font-size: 0.85rem;
+            color: #5a7a8f;
+            font-style: italic;
+        }
+
+        /* Translation table */
+        .translation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0 2rem;
+            font-size: 0.88rem;
+        }
+
+        .translation-table thead {
+            background: #1c2a35;
+            color: #e8eff4;
+        }
+
+        .translation-table th {
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-weight: normal;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .translation-table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #e0e6eb;
+            color: #3a3a3a;
+            vertical-align: top;
+        }
+
+        .translation-table tbody tr:nth-child(even) {
+            background: #fafcfd;
+        }
+
+        .translation-table .arrow {
+            color: #5a7a8f;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Product cards grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .product-card {
+            border: 1px solid #d8e2e9;
+            border-top: 3px solid #2d4a5e;
+            padding: 1.3rem;
+            background: #fafcfd;
+        }
+
+        .product-card h4 {
+            font-size: 0.95rem;
+            color: #1c2a35;
+            margin-bottom: 0.2rem;
+        }
+
+        .product-card .card-type {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card p {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card .finding {
+            font-size: 0.8rem;
+            color: #2d4a5e;
+            font-style: italic;
+        }
+
+        .product-card .status-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 2px;
+            font-family: -apple-system, sans-serif;
+            margin-top: 0.3rem;
+        }
+
+        .status-badge.active { background: #e6f3e6; color: #2a6a2a; }
+        .status-badge.prototype { background: #f5f0e6; color: #7a6030; }
+        .status-badge.developed { background: #e8eef6; color: #2d4a5e; }
+
+        /* Methodology cards */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .method-card {
+            padding: 1.2rem;
+            border: 1px solid #e0e6eb;
+            background: #f5f8fa;
+        }
+
+        .method-card h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin-bottom: 0.3rem;
+        }
+
+        .method-card p {
+            font-size: 0.83rem;
+            color: #5a6a7a;
+            margin-bottom: 0;
+        }
+
+        /* Design principles */
+        .principles-list {
+            list-style: none;
+            margin: 1.5rem 0 2rem;
+            counter-reset: principle;
+        }
+
+        .principles-list li {
+            counter-increment: principle;
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            border-bottom: 1px solid #f0f3f5;
+            font-size: 0.9rem;
+            color: #3a3a3a;
+            position: relative;
+        }
+
+        .principles-list li::before {
+            content: counter(principle);
+            position: absolute;
+            left: 0;
+            top: 0.8rem;
+            width: 1.6rem;
+            height: 1.6rem;
+            background: #1c2a35;
+            color: #e8eff4;
+            border-radius: 50%;
+            font-size: 0.72rem;
+            font-family: -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .principles-list li strong {
+            color: #1c2a35;
+        }
+
+        /* Stage timeline / progress tracker */
+        .stage-tracker {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .stage-tracker::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #d8e2e9;
+        }
+
+        .stage-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stage-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .stage-dot {
+            position: absolute;
+            left: 6px;
+            top: 0.2rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #d8e2e9;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stage-dot.nearly-complete {
+            border-color: #2d4a5e;
+            background: #2d4a5e;
+        }
+
+        .stage-dot.nearly-complete::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .stage-dot.next {
+            border-color: #2d4a5e;
+            background: #fff;
+        }
+
+        .stage-dot.next::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #2d4a5e;
+            border-radius: 50%;
+        }
+
+        .stage-dot.future {
+            border-color: #d8e2e9;
+            background: #fff;
+        }
+
+        .stage-item .stage-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5a7a8f;
+            margin-bottom: 0.2rem;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .stage-item h4 {
+            font-size: 0.95rem;
+            color: #1c2a35;
+            margin-bottom: 0.3rem;
+        }
+
+        .stage-item p {
+            font-size: 0.85rem;
+            color: #5a6a7a;
+            margin-bottom: 0.2rem;
+        }
+
+        .stage-item .stage-status {
+            font-size: 0.78rem;
+            font-style: italic;
+        }
+
+        .stage-status.active { color: #2a6a2a; }
+        .stage-status.upcoming { color: #2d4a5e; }
+        .stage-status.future { color: #8a9fb0; }
+
+        /* Recursion callout */
+        .callout {
+            border-left: 3px solid #5a7a8f;
+            padding: 1rem 1.5rem;
+            background: #f5f8fa;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #3a3a3a;
+            font-style: italic;
+        }
+
+        /* Companion section */
+        .companion-block {
+            border: 1px solid #d8e2e9;
+            border-left: 3px solid #2d4a5e;
+            padding: 1.5rem;
+            background: #fafcfd;
+            margin: 1.5rem 0;
+        }
+
+        .companion-block h4 {
+            font-size: 1rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .companion-block .card-meta {
+            font-size: 0.78rem;
+            color: #5a7a8f;
+            margin-bottom: 0.6rem;
+        }
+
+        .companion-block p {
+            font-size: 0.88rem;
+            margin-bottom: 0;
+        }
+
+        /* Related projects */
+        .related-links {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .related-links li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f3f5;
+            font-size: 0.88rem;
+        }
+
+        .related-links li .link-desc {
+            color: #5a6a7a;
+            font-size: 0.82rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e6eb;
+            text-align: center;
+        }
+
+        .footer a {
+            font-size: 0.85rem;
+            color: #5a7a8f;
+            border-bottom-color: transparent;
+        }
+
+        .footer a:hover {
+            color: #2d4a5e;
+            border-bottom-color: #2d4a5e;
+        }
+
+        .footer .footer-name {
+            font-size: 0.78rem;
+            color: #8a9fb0;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-bar {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .header-bar .page-subtitle { margin-left: 0; }
+            .main { padding: 2rem 1.5rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .method-grid { grid-template-columns: 1fr; }
+            .translation-table { font-size: 0.8rem; }
+            .translation-table th,
+            .translation-table td { padding: 0.5rem 0.6rem; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<!-- Header bar -->
+<header class="header-bar">
+    <a href="../index.html" class="site-name">Xiaomeng Qiao — Research</a>
+    <div>
+        <span class="page-title">Gentle Structure Lab</span>
+        <span class="page-subtitle">Technology as Containment</span>
+    </div>
+</header>
+
+<main class="main">
+
+    <!-- Hero -->
+    <section class="hero">
+        <a href="../index.html" class="back-link">&larr; Back to Research Hub</a>
+        <h1>Gentle Structure Lab</h1>
+        <div class="tagline">Technology as Containment</div>
+    </section>
+
+    <!-- Core Question -->
+    <h2>Core Question</h2>
+
+    <div class="core-question">
+        <p>What structural features of technology design create the experience of being contained &mdash; held? How can psychoanalytic thinking become not just content distributed through technology, but structure built into the medium itself?</p>
+    </div>
+
+    <p>The Gentle Structure Lab investigates how software design and AI can support processes of working through without controlling them. It asks what happens when the design principles come not from UX conventions or behavioural psychology, but from clinical psychoanalytic practice &mdash; from the experience of what it means to hold someone while they think.</p>
+
+    <!-- Intellectual Lineage -->
+    <h2>Intellectual Lineage</h2>
+
+    <p>This programme draws on a specific constellation of thinkers who have each, in different ways, asked what technology <em>could</em> be:</p>
+
+    <div class="lineage-item">
+        <p><strong>Alan Kay</strong> &mdash; computing as a medium for thought, not merely a tool for tasks. The computer is a metamedium: its real power lies in enabling forms of thinking that did not exist before.</p>
+    </div>
+    <div class="lineage-item">
+        <p><strong>Yuk Hui (&#35768;&#29020;)</strong> &mdash; cosmotechnics. Different epistemologies produce different technologies. The question is not how to use technology better, but what kind of technology a given worldview would produce.</p>
+    </div>
+    <div class="lineage-item">
+        <p><strong>Bret Victor / Dynamicland</strong> &mdash; philosophy as space. The environment itself should embody the principles, not just deliver content about them.</p>
+    </div>
+    <div class="lineage-item">
+        <p><strong>Ian Bogost</strong> &mdash; procedural rhetoric. Systems make arguments through their rules, not just through their text or images.</p>
+    </div>
+
+    <h3>The Empty Position</h3>
+
+    <p>There are technologists who think philosophically. There are psychoanalysts who write about technology. There are designers who invoke "empathy." But there is an empty position at the intersection of clinical practice, theoretical framework, and technical building &mdash; nobody occupies this combination. In psychoanalysis specifically, nobody has asked: <em>what would technology designed by psychoanalytic principles look like?</em></p>
+
+    <!-- Core Insight: Translation Table -->
+    <h2>The Core Insight &mdash; Clinical Methods as Design Methods</h2>
+
+    <p>The central contribution of this programme is a systematic translation of clinical psychoanalytic methods into software design principles. The clinical situation already knows how to hold someone through difficult thinking. The question is whether that knowledge can be structurally encoded.</p>
+
+    <table class="translation-table">
+        <thead>
+            <tr>
+                <th>Clinical Method</th>
+                <th class="arrow"></th>
+                <th>Design Principle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Containment (Bion)</td>
+                <td class="arrow">&rarr;</td>
+                <td>AI never touches user's text</td>
+            </tr>
+            <tr>
+                <td>Holding environment (Winnicott)</td>
+                <td class="arrow">&rarr;</td>
+                <td>Structure without control</td>
+            </tr>
+            <tr>
+                <td>Clinical process stages</td>
+                <td class="arrow">&rarr;</td>
+                <td>Different emotional registers per interface stage</td>
+            </tr>
+            <tr>
+                <td>Free association</td>
+                <td class="arrow">&rarr;</td>
+                <td>Brain dump (Enough Today)</td>
+            </tr>
+            <tr>
+                <td>Session ending / containing anxiety</td>
+                <td class="arrow">&rarr;</td>
+                <td>"That is enough for today"</td>
+            </tr>
+            <tr>
+                <td>Auxiliary ego functioning</td>
+                <td class="arrow">&rarr;</td>
+                <td>Product provides structure when user is overwhelmed</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Each row represents not an analogy but a structural translation: the same function, performed in a different medium. The research investigates which translations hold and which break down &mdash; and what the breakdowns reveal about both psychoanalytic theory and technology design.</p>
+
+    <!-- Products as Experiments -->
+    <h2>Products as Experiments</h2>
+
+    <p>Each product is a research site &mdash; a designed experiment testing whether specific clinical principles can be structurally encoded in software.</p>
+
+    <div class="product-grid">
+        <div class="product-card">
+            <h4>Palimpsest</h4>
+            <div class="card-type">Writing Tool</div>
+            <p>Container-oriented design for academic and reflective writing. AI assists structure and reflection; the user's text remains untouched.</p>
+            <div class="finding">Key finding: rigor vs. judgment tension in LLM mode switching.</div>
+            <span class="status-badge active">Phase 1 complete &middot; 2 paying users</span>
+        </div>
+        <div class="product-card">
+            <h4>Enough Today</h4>
+            <div class="card-type">Daily Containment</div>
+            <p>Anti-to-do-list. Brain dump everything &rarr; AI says "that is enough" &rarr; structured reflection. Designed to contain anxiety rather than optimise productivity.</p>
+            <span class="status-badge prototype">Prototype</span>
+        </div>
+        <div class="product-card">
+            <h4>PEP Plugin</h4>
+            <div class="card-type">Critical Reading</div>
+            <p>Makes psychoanalytic literature's own biases visible during reading. Surfaces the theoretical commitments and blind spots embedded in clinical writing.</p>
+            <span class="status-badge developed">Developed &middot; not yet launched</span>
+        </div>
+        <div class="product-card">
+            <h4>&#21338;&#38597;&#31934;&#31070;&#20998;&#26512;</h4>
+            <div class="card-type">Education</div>
+            <p>Course as gentle structure. Subscription-based psychoanalytic education designed so that the course structure itself models the process it teaches.</p>
+            <span class="status-badge active">Active &middot; 260+ subscribers</span>
+        </div>
+    </div>
+
+    <!-- Methodology -->
+    <h2>Methodology</h2>
+
+    <div class="method-grid">
+        <div class="method-card">
+            <h4>Research through Design (RtD)</h4>
+            <p>Knowledge generated from the act of designing. Each product iteration produces designerly knowledge &mdash; not just a better product, but new understanding of what containment means in a technological context.</p>
+        </div>
+        <div class="method-card">
+            <h4>Psycho-social Methods</h4>
+            <p>Free-association narrative interviews (FANI), researcher countertransference as data, attention to defence mechanisms in the research encounter. The user's experience is studied psychoanalytically, not just behaviourally.</p>
+        </div>
+        <div class="method-card">
+            <h4>Strong Concept</h4>
+            <p>Following H&ouml;&ouml;k &amp; L&ouml;wgren: "gentle structure" as a strong concept &mdash; design knowledge that is more abstract than a particular instance but more concrete than a theory. Transferable across products and contexts.</p>
+        </div>
+        <div class="method-card">
+            <h4>The Recursion</h4>
+            <p>The method itself is an instance of the thing being studied. Studying gentle structure through a research process that is itself gently structured. The methodology models its own object.</p>
+        </div>
+    </div>
+
+    <div class="callout">
+        The recursion is the distinctive feature of this programme: we study containment through a research process that must itself be containing. The research design is not separate from the research object &mdash; it is the first test case.
+    </div>
+
+    <!-- Container-Oriented Design Principles -->
+    <h2>Container-Oriented Design Principles</h2>
+
+    <p>Current working principles, derived primarily from Palimpsest development. These are provisional &mdash; the research programme is designed to test, refine, and extend them.</p>
+
+    <ol class="principles-list">
+        <li><strong>AI never touches user's text</strong> &mdash; every word is theirs. The system may reflect, question, or structure, but the user's expression remains inviolate.</li>
+        <li><strong>Protective friction</strong> &mdash; intentional friction that protects thinking. Not all smooth flows serve the user; some slowdowns create space for reflection.</li>
+        <li><strong>Stage awareness</strong> &mdash; different stages carry different emotional registers. A brainstorming interface should feel different from a revision interface, because the psychological work is different.</li>
+        <li><strong>Methodology as structure, not rules</strong> &mdash; the user defines "good." AI reflects their commitments back to them rather than imposing external standards.</li>
+        <li><strong>Mode switching externalised as conscious user choice</strong> &mdash; the system does not silently change its behaviour. Every shift in mode is visible and chosen.</li>
+        <li><strong>Transparency is a condition of containment</strong> &mdash; you cannot feel held by something you do not understand. The system's logic must be legible.</li>
+    </ol>
+
+    <!-- Research Stages -->
+    <h2>Research Stages</h2>
+
+    <div class="stage-tracker">
+        <div class="stage-item">
+            <div class="stage-dot nearly-complete"></div>
+            <div class="stage-label">Stage 1</div>
+            <h4>Experiment Documentation</h4>
+            <p>Design reflections for each product &mdash; documenting what was built, why, and what was learned. Making tacit design knowledge explicit.</p>
+            <div class="stage-status active">Nearly complete</div>
+        </div>
+        <div class="stage-item">
+            <div class="stage-dot next"></div>
+            <div class="stage-label">Stage 2</div>
+            <h4>First User Inquiry</h4>
+            <p>Pilot psycho-social conversation with a first user (Enough Today). FANI interview method. What does "being contained by software" feel like from the inside?</p>
+            <div class="stage-status upcoming">Next</div>
+        </div>
+        <div class="stage-item">
+            <div class="stage-dot future"></div>
+            <div class="stage-label">Stage 3</div>
+            <h4>Iteration Cycles</h4>
+            <p>Redesign based on user feedback, 2&ndash;3 documented rounds. Research question: what design changes affect the experience of containment? Product outcome: user-driven improvements.</p>
+            <div class="stage-status future">Planned</div>
+        </div>
+        <div class="stage-item">
+            <div class="stage-dot future"></div>
+            <div class="stage-label">Stage 4</div>
+            <h4>Cross-Product Comparison</h4>
+            <p>Annotated portfolio across all products + framework paper. Which principles hold across writing tools, daily containment, critical reading, and education? Product outcome: design principles for all future products.</p>
+            <div class="stage-status future">Planned</div>
+        </div>
+        <div class="stage-item">
+            <div class="stage-dot future"></div>
+            <div class="stage-label">Stage 5</div>
+            <h4>Theory</h4>
+            <p>Connect findings to Yuk Hui's cosmotechnics, Alan Kay's metamedium, and the broader question: what kind of technology does psychoanalytic epistemology produce?</p>
+            <div class="stage-status future">Planned</div>
+        </div>
+    </div>
+
+    <!-- Companion Substack -->
+    <h2>Companion Writing</h2>
+
+    <div class="companion-block">
+        <h4>A Psychoanalytic Vibe Coder</h4>
+        <div class="card-meta">Substack &middot; reflective writing alongside building</div>
+        <p>Not documentation and not marketing &mdash; but reflective writing that runs alongside the building process. Each piece asks: what am I learning about psychoanalysis by trying to encode it in software? What am I learning about software by approaching it psychoanalytically?</p>
+    </div>
+
+    <!-- Related Projects -->
+    <h2>Related Projects</h2>
+
+    <ul class="related-links">
+        <li>
+            <a href="../psychoanalytic-literacy/">Psychoanalytic Literacy</a>
+            <span class="link-desc"> &mdash; the education layer. How psychoanalytic understanding grows through reading, creating, and being held.</span>
+        </li>
+        <li>
+            <a href="https://xiaomengicp.github.io/buddhism-psychoanalysis-research/">Buddhism &times; Psychoanalysis</a>
+            <span class="link-desc"> &mdash; the content layer. Systematic comparative conceptual analysis between Buddhist and psychoanalytic frameworks.</span>
+        </li>
+        <li>
+            <a href="../index.html">Research Hub</a>
+            <span class="link-desc"> &mdash; all research programmes, publications, and creative practice.</span>
+        </li>
+    </ul>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="../index.html">&larr; Xiaomeng Qiao &mdash; Research</a>
+        <div class="footer-name">Gentle Structure Lab &middot; 2026</div>
+    </div>
+
+</main>
+
+</body>
+</html>
