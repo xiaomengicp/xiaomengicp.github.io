@@ -386,6 +386,46 @@
             margin-top: 0.8rem;
         }
 
+        /* Timeline */
+        .timeline {
+            margin: 1.5rem 0;
+            border-left: 2px solid #d8e2e9;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.4rem;
+            width: 8px;
+            height: 8px;
+            background: #2d4a5e;
+            border-radius: 50%;
+        }
+
+        .timeline-item .year {
+            font-size: 0.75rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .timeline-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin: 0.2rem 0;
+        }
+
+        .timeline-item p {
+            font-size: 0.83rem;
+            color: #5a6a7a;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
@@ -426,6 +466,7 @@
         </div>
         <div class="nav-group">
             <div class="nav-group-title">Context</div>
+            <a href="#roots">Roots</a>
             <a href="#related-projects">Related Projects</a>
         </div>
         <div class="nav-group">
@@ -461,7 +502,7 @@
     <!-- Research Site -->
     <h2 id="research-site">Research Site</h2>
 
-    <p><strong>&#20309;&#33510;&#24320;&#24515;</strong> (hekukaixin) is a cultural-educational brand founded in 2020. Over six years it has grown into a multi-media ecology: 300+ original articles, courses with 260+ paid subscribers, fiction, games, and AI-generated music and visual art &mdash; all exploring how psychoanalytic understanding travels through different channels.</p>
+    <p><strong>&#20309;&#33510;&#24320;&#24515;</strong> (hekukaixin) is a cultural-educational brand founded in 2020. Over six years it has grown into a multi-media ecology with 20,000+ readers: 300+ original articles, courses with 260+ paid subscribers, fiction, games, and AI-generated music and visual art &mdash; all exploring how psychoanalytic understanding travels through different channels.</p>
 
     <p>The brand itself is the research site. Each piece of content is both a cultural product and a designed intervention within an iterative research cycle &mdash; with the researcher simultaneously acting as designer, practitioner, and subject.</p>
 
@@ -562,6 +603,49 @@
         <li>Tracy, S. J. (2013). <em>Qualitative Research Methods.</em></li>
         <li>Tracy, S. J. (2020). Phronetic iterative analysis.</li>
     </ul>
+
+    <!-- Roots -->
+    <h2 id="roots">Roots</h2>
+
+    <p>The research site &mdash; &#20309;&#33510;&#24320;&#24515; and the ecology around it &mdash; has been building since 2020. Naming psychoanalytic literacy as a research programme in 2026 formalises six years of practice, not a fresh start.</p>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="year">2020</div>
+            <h4>&#20309;&#33510;&#24320;&#24515; founded</h4>
+            <p>WeChat public account launched. Psychoanalytic writing for general audiences. Began translating psychoanalytic lecture videos.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2021</div>
+            <h4>First content experiments</h4>
+            <p>Podcast &#28165;&#37266;&#26790; (30+ episodes). Paid newsletter &#38543;&#24840;&#32780;&#23433; (&#23567;&#25253;&#31461;). Psychoanalytic literature notebook. &#21672;&#35810;&#24072;&#20803;&#30693;&#35782;&#24211; launched. Completed &#21672;&#35810;&#24072;&#30340;&#33258;&#23186;&#20307;&#25351;&#21271;.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2022</div>
+            <h4>Concept emerges</h4>
+            <p>Chinese newsletter &#38405;&#35835;&#32852;&#24819; launched (ongoing). The concept of psychoanalytic literacy begins to take shape &mdash; not yet explicitly named.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2023</div>
+            <h4>English expansion</h4>
+            <p>English newsletter CPS launched (ongoing). Digital garden: &#26195;&#33804;&#30340;&#36807;&#28193;&#31354;&#38388;.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2024</div>
+            <h4>First academic study</h4>
+            <p>MA dissertation: <em>Nurturing the Creative Self</em> (Tavistock) &mdash; first academic research on psychoanalytic literacy in an online community. Psychoanalysis-related AI creative work.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2025</div>
+            <h4>Multi-media expansion</h4>
+            <p>AI music albums (<em>Enough</em>, <em>Emotional Device 404</em>). QPHU novel series begins. Six peer-reviewed papers published. CPS regular writing. &#21338;&#38597;&#31934;&#31070;&#20998;&#26512; preparation &mdash; platform live and early users onboarded while refining course structure.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2026</div>
+            <h4>Programme launch</h4>
+            <p>&#21338;&#38597;&#31934;&#31070;&#20998;&#26512; launched (260+ paid members). Psychoanalytic Literacy formally named as research concept. Reader response coding begins.</p>
+        </div>
+    </div>
 
     <!-- Related Projects -->
     <h2 id="related-projects">Related Projects</h2>

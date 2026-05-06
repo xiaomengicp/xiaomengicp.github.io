@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Subjectivity — Xiaomeng Qiao</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #1c2a35;
+            color: #c8d6df;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-size: 1.15rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.78rem;
+            color: #8a9fb0;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .sidebar nav { margin-bottom: 2rem; flex: 1; }
+
+        .sidebar .nav-group { margin-bottom: 1.2rem; }
+
+        .sidebar .nav-group-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active { color: #e8eff4; }
+
+        .sidebar .links {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        /* Main content */
+        .main {
+            margin-left: 260px;
+            padding: 3rem 4rem 5rem;
+            max-width: 960px;
+        }
+
+        .hero { margin-bottom: 3rem; }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.05rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #1c2a35;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #2d4a5e;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+            font-size: 0.95rem;
+        }
+
+        .main a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+            transition: border-color 0.2s;
+        }
+
+        .main a:hover { border-color: #2d4a5e; }
+
+        em { color: #3a3a3a; }
+        strong { color: #1c2a35; }
+
+        /* Info cards */
+        .info-card {
+            border: 1px solid #d8e2e9;
+            border-left: 3px solid #2d4a5e;
+            padding: 1.5rem;
+            background: #fafcfd;
+            margin: 1.5rem 0;
+        }
+
+        .info-card h4 {
+            font-size: 1rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-card .card-meta {
+            font-size: 0.78rem;
+            color: #5a7a8f;
+            margin-bottom: 0.6rem;
+        }
+
+        .info-card p {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Publication list */
+        .pub-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .pub-list li {
+            font-size: 0.88rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f3f5;
+            color: #3a3a3a;
+        }
+
+        .pub-list li em { color: #5a6a7a; }
+
+        .pub-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 2px;
+            margin-right: 0.3rem;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .pub-tag.published { background: #e6f3e6; color: #2a6a2a; }
+        .pub-tag.accepted { background: #e8eef6; color: #2d4a5e; }
+        .pub-tag.invited { background: #f5f0e6; color: #7a6030; }
+        .pub-tag.in-progress { background: #f0f0f0; color: #555; }
+        .pub-tag.award { background: #f5e6f0; color: #6a2d5e; }
+        .pub-tag.cross { background: #f0f5f0; color: #5a7a5a; font-style: italic; }
+        .pub-tag.professional { background: #eff0f0; color: #4a4a4a; }
+
+        /* Presentation list */
+        .pres-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .pres-list li {
+            font-size: 0.88rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f3f5;
+            color: #3a3a3a;
+        }
+
+        .pres-list .year {
+            font-size: 0.75rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+            margin-right: 0.5rem;
+        }
+
+        /* Related grid */
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .related-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: #f5f8fa;
+            border: 1px solid #e0e6eb;
+            transition: border-color 0.2s;
+        }
+
+        .related-item:hover { border-color: #c0d0da; }
+
+        .related-item a { border-bottom: none; }
+
+        .related-item .layer-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5a7a8f;
+            margin-bottom: 0.4rem;
+        }
+
+        .related-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin-bottom: 0.3rem;
+        }
+
+        .related-item p {
+            font-size: 0.78rem;
+            color: #5a6a7a;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e6eb;
+            text-align: center;
+        }
+
+        .footer a {
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            border-bottom: none;
+        }
+
+        .footer a:hover { color: #2d4a5e; }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: #b0bec5;
+            margin-top: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; padding: 1.5rem; }
+            .sidebar .links { margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem 4rem; }
+            .hero h1 { font-size: 1.6rem; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst in training &middot; researcher &middot; writer</div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">Research</div>
+            <a href="#overview">Overview</a>
+            <a href="#dissertation">Dissertation</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Output</div>
+            <a href="#publications">Publications</a>
+            <a href="#presentations">Presentations</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Context</div>
+            <a href="#related">Related Lines</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Projects</div>
+            <a href="../index.html">&larr; Research Hub</a>
+            <a href="../gender-trans/">Gender &amp; Trans</a>
+            <a href="../clinical/">Clinical</a>
+        </div>
+    </nav>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://apsychoanalyticvibecoder.substack.com" target="_blank">PVC</a>
+    </div>
+</aside>
+
+<main class="main">
+
+    <section class="hero">
+        <h1>Chinese Subjectivity</h1>
+        <div class="tagline">Psychoanalytic Approaches to Chinese Experience</div>
+    </section>
+
+    <h2 id="overview">Overview</h2>
+
+    <p>A sustained line of research investigating Chinese subjectivity through psychoanalytic theory &mdash; from the formation of the unconscious in specific cultural-historical conditions to the contemporary psychoanalytic scene in China. This line encompasses the doctoral dissertation, ongoing publication work, and the <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">Chinese Psychoanalytic Scene (CPS)</a> Substack (850+ subscribers, launched 2024, regular publishing from 2025).</p>
+
+    <h2 id="dissertation">Dissertation</h2>
+
+    <div class="info-card">
+        <h4>The Drifting Subject</h4>
+        <div class="card-meta">PsyaD &middot; Boston Graduate School of Psychoanalysis &middot; Proposal completed May 2026</div>
+        <p>Using Laplanche's general theory of seduction to investigate Chinese subjectivity. Six layers of "growth rings" &mdash; tradition, colonial modernity, revolutionary trauma, family, capitalism, state &mdash; each depositing enigmatic messages that the subject must translate. The argument centres on <em>refusal to translate</em> as a mode of subject formation: defensive refusal ("not this"), creative refusal (finding one's own codes), and the mourning required to move between them.</p>
+        <p style="font-size: 0.82rem; color: #2d4a5e; font-style: italic;">The dissertation proposal was completed in May 2026. Writing is at its earliest stage. The publications listed below are independent research &mdash; they inform the broader project but are not dissertation chapters.</p>
+    </div>
+
+    <h2 id="publications">Publications</h2>
+
+    <h3>Published</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag published">published</span> <span class="pub-tag award">Erika First Prize 2024</span> Qiao, X. (2025). Deprivation and disruption: The development of narcissistic vulnerability and toxic masculinity in some Chinese contexts. <em>Psychoanalysis, Self and Context</em>, 20(2), 237&ndash;253. <a href="https://doi.org/10.1080/24720038.2024.2398679" target="_blank">DOI</a> <span class="pub-tag cross">&rarr; Clinical</span></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). Gaming the unconscious: The relational and social unconscious in a contemporary Chinese case study. <em>Psychoanalysis and Psychotherapy in China</em>, 8(1&ndash;2), 14&ndash;24. <a href="https://doi.org/10.33212/ppc.v8.2025.14" target="_blank">DOI</a> <span class="pub-tag cross">&rarr; Clinical</span></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). The role of social media in shaping mental health discourse: A case study of China's psychoanalysis and counselling narratives. <em>Psychoanalysis and Psychotherapy in China</em>, 8(1&ndash;2), 115&ndash;125. <a href="https://doi.org/10.33212/ppc.v8.2025.115" target="_blank">DOI</a></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2024). Mother archetypes in Chinese cultural narratives: A psychoanalytic perspective. <em>Psychoanalysis and Psychotherapy in China</em>, 7(1&ndash;2), 139&ndash;153. <a href="https://doi.org/10.33212/ppc.v7.2024.139" target="_blank">DOI</a></li>
+    </ul>
+
+    <h3>Forthcoming</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag accepted">forthcoming</span> <span class="pub-tag award">LGBTQ+ Outstanding Trainee Paper 2026</span> Qiao, X. Ghostly Persistence: Disavowal, Remainder, and the Indigestible Queer Subject in China. <em>Journal of LGBTQ+ Mental Health</em>. <span class="pub-tag cross">&rarr; Queer</span></li>
+        <li><span class="pub-tag accepted">forthcoming</span> Qiao, X. Oedipal Variations in Chinese Luoshan Motif. <em>Psychoanalysis and Psychotherapy in China</em>.</li>
+    </ul>
+
+    <h3>Invited</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag invited">invited</span> Qiao, X. Confusion of Tongues in the Chinese Context. <em>Psychoanalytic Inquiry</em> (journal commission).</li>
+    </ul>
+
+    <h3>In Progress</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag in-progress">in progress</span> Shidafu and Narcissistic Structure (&#22763;&#22823;&#22827;&#19982;&#33258;&#24651;&#32467;&#26500;). Depth hermeneutics; Kohut's selfobject theory. Reading the <em>shidafu</em> position as a narcissistic regulation structure.</li>
+        <li><span class="pub-tag in-progress">in progress</span> Coming Out as Translational Rupture: Refusal, Separation, and the Queer Subject in China <span class="pub-tag cross">&rarr; Queer</span></li>
+    </ul>
+
+    <h3>Professional Publications</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). <a href="https://analytic-room.com/essays/between-worlds-a-chinese-analysts-journey-by-xiaomeng-qiao/" target="_blank">Between Worlds: A Chinese Analyst's Journey.</a> <em>Room: A Sketchbook for Analytic Action</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). <a href="https://tapmagazine.org/all-articles/between-two-names" target="_blank">Between Two Names.</a> <em>The American Psychoanalyst</em>.</li>
+    </ul>
+
+    <h3>Awards</h3>
+    <ul class="pub-list">
+        <li><span class="pub-tag award">award</span> 2024 Erika Schmidt Essay Prize (First Prize), Chicago Psychoanalytic Institute &mdash; Toxic Masculinity</li>
+        <li><span class="pub-tag award">award</span> 2026 Outstanding Trainee Paper Award, <em>Journal of LGBTQ+ Mental Health</em> &mdash; Ghostly Persistence <span class="pub-tag cross">&rarr; Queer</span></li>
+    </ul>
+
+    <h2 id="presentations">Presentations</h2>
+
+    <ul class="pres-list">
+        <li><span class="year">2026</span> Understanding Chinese Subjectivity: Growth Rings, Psychoanalytic Development, and Clinical Implications. <strong>British Psychoanalytic Foundation (BPF)</strong> (forthcoming)</li>
+        <li><span class="year">2026</span> Cultural Sensitivity in Psychoanalytic Education. <strong>Chicago Psychoanalytic Institute</strong></li>
+        <li><span class="year">2024</span> Narcissistic Vulnerability and Toxic Masculinity. <strong>Chicago Psychoanalytic Institute</strong></li>
+    </ul>
+
+    <h2 id="related">Related Lines</h2>
+
+    <div class="related-grid">
+        <div class="related-item">
+            <div class="layer-label">Research Line</div>
+            <a href="../gender-trans/">
+                <h4>Gender &amp; Trans</h4>
+            </a>
+            <p>Transgender experience, queer subjectivity, and gender as enigmatic message.</p>
+        </div>
+        <div class="related-item">
+            <div class="layer-label">Research Line</div>
+            <a href="../clinical/">
+                <h4>Clinical</h4>
+            </a>
+            <p>Clinical papers emerging from psychoanalytic practice.</p>
+        </div>
+        <div class="related-item">
+            <div class="layer-label">All Research</div>
+            <a href="../index.html">
+                <h4>Research Hub</h4>
+            </a>
+            <p>Full overview of research programmes and publications.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../index.html">&larr; Back to Research Hub</a>
+        <p>Xiaomeng Qiao &middot; Chinese Subjectivity</p>
+    </div>
+
+</main>
+
+<script>
+    const sections = document.querySelectorAll('h2[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
