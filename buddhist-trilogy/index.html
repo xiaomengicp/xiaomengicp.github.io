@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buddhist Trilogy — Xiaomeng Qiao</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #1c2a35;
+            color: #c8d6df;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-size: 1.15rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.78rem;
+            color: #8a9fb0;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .sidebar nav { margin-bottom: 2rem; flex: 1; }
+
+        .sidebar .nav-group { margin-bottom: 1.2rem; }
+
+        .sidebar .nav-group-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active { color: #e8eff4; }
+
+        .sidebar .links {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        /* Main content */
+        .main {
+            margin-left: 260px;
+            padding: 3rem 4rem 5rem;
+            max-width: 960px;
+        }
+
+        .hero { margin-bottom: 3rem; }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.05rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #1c2a35;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #2d4a5e;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+            font-size: 0.95rem;
+        }
+
+        .main a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+            transition: border-color 0.2s;
+        }
+
+        .main a:hover { border-color: #2d4a5e; }
+
+        em { color: #3a3a3a; }
+        strong { color: #1c2a35; }
+
+        /* Info cards */
+        .info-card {
+            border: 1px solid #d8e2e9;
+            border-left: 3px solid #2d4a5e;
+            padding: 1.5rem;
+            background: #fafcfd;
+            margin: 1.5rem 0;
+        }
+
+        .info-card h4 {
+            font-size: 1rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-card .card-meta {
+            font-size: 0.78rem;
+            color: #5a7a8f;
+            margin-bottom: 0.6rem;
+        }
+
+        .info-card p {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Comp line */
+        .comp-line {
+            font-size: 0.85rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 2px solid #d8e2e9;
+        }
+
+        /* Status indicator */
+        .status-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 2px;
+            font-family: -apple-system, sans-serif;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .status-tag.complete { background: #e6f3e6; color: #2a6a2a; }
+        .status-tag.revision { background: #f5f0e6; color: #7a6030; }
+        .status-tag.development { background: #e8eef6; color: #2d4a5e; }
+        .status-tag.planned { background: #f0f0f0; color: #555; }
+
+        /* Chinese title styling */
+        .book-chinese {
+            font-size: 1.15rem;
+            color: #1c2a35;
+            letter-spacing: 0.05em;
+        }
+
+        .book-reading {
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin-left: 0.3rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 1.5rem 0;
+            border-left: 2px solid #d8e2e9;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.4rem;
+            width: 8px;
+            height: 8px;
+            background: #2d4a5e;
+            border-radius: 50%;
+        }
+
+        .timeline-item .year {
+            font-size: 0.75rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .timeline-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin: 0.2rem 0;
+        }
+
+        .timeline-item p {
+            font-size: 0.83rem;
+            color: #5a6a7a;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e6eb;
+            text-align: center;
+        }
+
+        .footer a {
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            border-bottom: none;
+        }
+
+        .footer a:hover { color: #2d4a5e; }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: #b0bec5;
+            margin-top: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; padding: 1.5rem; }
+            .sidebar .links { margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem 4rem; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst in training &middot; researcher &middot; writer</div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">The Trilogy</div>
+            <a href="#about">About</a>
+            <a href="#book-1">《我佛》</a>
+            <a href="#book-2">《師子》</a>
+            <a href="#book-3">《法身》</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Context</div>
+            <a href="#arc">Arc</a>
+            <a href="#timeline">Timeline</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Links</div>
+            <a href="../index.html">&larr; Research Hub</a>
+            <a href="https://negotiatingwithmyghosts.substack.com/" target="_blank">Negotiating with My Ghost</a>
+        </div>
+    </nav>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://apsychoanalyticvibecoder.substack.com" target="_blank">PVC</a>
+    </div>
+</aside>
+
+<main class="main">
+
+    <section class="hero">
+        <h1>Buddhist Trilogy</h1>
+        <div class="tagline">《我佛》《師子》《法身》</div>
+    </section>
+
+    <!-- About -->
+    <h2 id="about">About</h2>
+
+    <p>Three volumes of autobiographical fiction, each structured around a relationship that cannot be resolved &mdash; only inhabited. The trilogy follows a narrator across years of Buddhist practice, tracing how encounter, rupture, and return reshape what it means to have a body, a teacher, and a faith.</p>
+
+    <p>Each title holds a split. <strong>我佛</strong> &mdash; I and Buddha. <strong>師子</strong> &mdash; master and disciple. <strong>法身</strong> &mdash; dharma and body. The Chinese characters sit together but never fuse: two terms held in tension, the space between them becoming the territory of the writing.</p>
+
+    <div class="comp-line">Not memoir, not doctrine. Fiction that stays close enough to experience to feel true, and far enough from autobiography to think.</div>
+
+    <!-- Book 1 -->
+    <h2 id="book-1"><span class="book-chinese">《我佛》</span><span class="book-reading"> &mdash; My Buddha</span> <span class="status-tag complete">draft complete</span></h2>
+
+    <div class="info-card">
+        <h4>我佛</h4>
+        <div class="card-meta">~100,000 Chinese characters &middot; First draft complete</div>
+        <p>The distance between a person and a tradition they entered uninvited. What does it mean to arrive at Buddhism not through lineage or study but through collapse &mdash; and to remain, uncertainly, after the collapse recedes?</p>
+        <p>The first volume traces the narrator&rsquo;s initial encounter with Buddhist practice: retreats, communities, devotion, doubt. The question is not whether Buddhism works, but what it means to need it &mdash; and what remains when the need changes shape.</p>
+    </div>
+
+    <p><strong>Current status:</strong> First draft complete. Awaiting revision.</p>
+
+    <!-- Book 2 -->
+    <h2 id="book-2"><span class="book-chinese">《師子》</span><span class="book-reading"> &mdash; Lion</span> <span class="status-tag development">in development</span></h2>
+
+    <div class="info-card">
+        <h4>師子</h4>
+        <div class="card-meta">Short version published &middot; Full volume in development</div>
+        <p>The teacher-student relationship &mdash; its authority, its intimacy, its capacity for harm. What happens to faith when the person who transmitted it is revealed to have betrayed the structure they embodied?</p>
+        <p>師子 means lion, but the characters also read as master (師) and child (子). The second volume sits inside this double meaning: the ferocity of transmission, the vulnerability of receiving it, and the rupture that follows when the lineage itself fractures.</p>
+    </div>
+
+    <p>A shorter version has been published on <a href="https://negotiatingwithmyghosts.substack.com/" target="_blank">Negotiating with My Ghost</a>. The full volume has not yet been written.</p>
+
+    <!-- Book 3 -->
+    <h2 id="book-3"><span class="book-chinese">《法身》</span><span class="book-reading"> &mdash; Dharma Body</span> <span class="status-tag revision">in progress</span></h2>
+
+    <div class="info-card">
+        <h4>法身</h4>
+        <div class="card-meta">5 chapters complete &middot; ~70,000&ndash;80,000 characters drafted &middot; Target: 150,000&ndash;200,000</div>
+        <p>After rupture, what returns &mdash; and in what body? The third volume is the longest and the most retrospective: a narrator who has come to understand his own body differently, revisiting every temple, every teacher, every practice through that changed understanding.</p>
+        <p>法身 &mdash; the dharma body, the body of teaching &mdash; becomes a question about which body receives the dharma, and whether the dharma can survive the body&rsquo;s transformation. What does Buddhist practice look like when the practitioner is no longer the person who first arrived?</p>
+    </div>
+
+    <p><strong>Current status:</strong> Five chapters complete. Actively writing. The longest and final volume of the trilogy.</p>
+
+    <!-- Arc -->
+    <h2 id="arc">Arc</h2>
+
+    <p>The three volumes move through a single trajectory: <strong>encounter &rarr; rupture &rarr; return</strong>. But each stage undoes the previous one. The encounter in 《我佛》 is not innocent &mdash; it is driven by need. The rupture in 《師子》 is not simply loss &mdash; it reveals what was always unstable in the transmission. And the return in 《法身》 is not restoration &mdash; it is a different person arriving at a practice that can no longer pretend it was ever stable.</p>
+
+    <p>The trilogy&rsquo;s deepest question may be: <em>can you keep a practice that failed you &mdash; not by forgiving it, but by understanding why you needed it to fail?</em></p>
+
+    <!-- Timeline -->
+    <h2 id="timeline">Timeline</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="year">2018</div>
+            <h4>First long-form work</h4>
+            <p>A literary prize submission becomes the seed of 《我佛》&mdash; the first sustained attempt to write about Buddhist experience in fiction form.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2018&ndash;2023</div>
+            <h4>《我佛》 drafted</h4>
+            <p>The first volume takes shape over several years, growing to approximately 100,000 Chinese characters. The writing follows the pace of the experience it describes.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2025</div>
+            <h4>《師子》 short version published</h4>
+            <p>A condensed version of the second volume appears on <a href="https://negotiatingwithmyghosts.substack.com/" target="_blank">Negotiating with My Ghost</a>.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2025&ndash;2026</div>
+            <h4>《法身》 in progress</h4>
+            <p>The third and longest volume is actively being written. Five chapters complete, with the retrospective structure demanding a different kind of attention than the earlier books.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../index.html">&larr; Back to Research Hub</a>
+        <p>Xiaomeng Qiao &middot; Buddhist Trilogy</p>
+    </div>
+
+</main>
+
+<script>
+    const sections = document.querySelectorAll('h2[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QPHU — Xiaomeng Qiao</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #1c2a35;
+            color: #c8d6df;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-size: 1.15rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.78rem;
+            color: #8a9fb0;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .sidebar nav { margin-bottom: 2rem; flex: 1; }
+
+        .sidebar .nav-group { margin-bottom: 1.2rem; }
+
+        .sidebar .nav-group-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active { color: #e8eff4; }
+
+        .sidebar .links {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        /* Main content */
+        .main {
+            margin-left: 260px;
+            padding: 3rem 4rem 5rem;
+            max-width: 960px;
+        }
+
+        .hero { margin-bottom: 3rem; }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.05rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #1c2a35;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #2d4a5e;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+            font-size: 0.95rem;
+        }
+
+        .main a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+            transition: border-color 0.2s;
+        }
+
+        .main a:hover { border-color: #2d4a5e; }
+
+        em { color: #3a3a3a; }
+        strong { color: #1c2a35; }
+
+        /* Info cards */
+        .info-card {
+            border: 1px solid #d8e2e9;
+            border-left: 3px solid #2d4a5e;
+            padding: 1.5rem;
+            background: #fafcfd;
+            margin: 1.5rem 0;
+        }
+
+        .info-card h4 {
+            font-size: 1rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-card .card-meta {
+            font-size: 0.78rem;
+            color: #5a7a8f;
+            margin-bottom: 0.6rem;
+        }
+
+        .info-card p {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Comp line */
+        .comp-line {
+            font-size: 0.85rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 2px solid #d8e2e9;
+        }
+
+        /* Status indicator */
+        .status-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 2px;
+            font-family: -apple-system, sans-serif;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .status-tag.complete { background: #e6f3e6; color: #2a6a2a; }
+        .status-tag.revision { background: #f5f0e6; color: #7a6030; }
+        .status-tag.development { background: #e8eef6; color: #2d4a5e; }
+        .status-tag.planned { background: #f0f0f0; color: #555; }
+
+        /* Theme list */
+        .theme-list {
+            list-style: none;
+            margin: 1rem 0;
+            column-count: 2;
+            column-gap: 2rem;
+        }
+
+        .theme-list li {
+            font-size: 0.85rem;
+            color: #5a6a7a;
+            padding: 0.3rem 0;
+            break-inside: avoid;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 1.5rem 0;
+            border-left: 2px solid #d8e2e9;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.4rem;
+            width: 8px;
+            height: 8px;
+            background: #2d4a5e;
+            border-radius: 50%;
+        }
+
+        .timeline-item .year {
+            font-size: 0.75rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .timeline-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin: 0.2rem 0;
+        }
+
+        .timeline-item p {
+            font-size: 0.83rem;
+            color: #5a6a7a;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e6eb;
+            text-align: center;
+        }
+
+        .footer a {
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            border-bottom: none;
+        }
+
+        .footer a:hover { color: #2d4a5e; }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: #b0bec5;
+            margin-top: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; padding: 1.5rem; }
+            .sidebar .links { margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem 4rem; }
+            .hero h1 { font-size: 1.6rem; }
+            .theme-list { column-count: 1; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst in training &middot; researcher &middot; writer</div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">The Project</div>
+            <a href="#about">About</a>
+            <a href="#book-1">Book 1</a>
+            <a href="#book-2">Book 2</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Context</div>
+            <a href="#themes">Themes</a>
+            <a href="#timeline">Timeline</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Links</div>
+            <a href="../index.html">&larr; Research Hub</a>
+            <a href="https://negotiatingwithmyghosts.substack.com/" target="_blank">Negotiating with My Ghost</a>
+        </div>
+    </nav>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://apsychoanalyticvibecoder.substack.com" target="_blank">PVC</a>
+    </div>
+</aside>
+
+<main class="main">
+
+    <section class="hero">
+        <h1>QPHU</h1>
+        <div class="tagline">Queer Poetic Healing Universe</div>
+    </section>
+
+    <!-- About -->
+    <h2 id="about">About</h2>
+
+    <p>QPHU is a speculative fiction series set in a world where people&rsquo;s shadows &mdash; their inner selves &mdash; are managed, trained, and sometimes annihilated by institutions that call it healing. A marginalised teenager must reconnect with his own shadow, refuse the false integration offered by the system, and find chosen family underground.</p>
+
+    <p>The novel began as an indie role-playing game and grew into fiction. Its world is built from the emotional logic of psychoanalytic thinking &mdash; not as allegory, but as architecture. Shadows operate like the unconscious. Institutions that claim to heal actually suppress. The underground community that forms in response is messy, partial, and real.</p>
+
+    <div class="comp-line">Reads like <em>The House in the Cerulean Sea</em> meets <em>The Poppy War</em>, with the psychological interiority of <em>Cemetery Boys</em>.</div>
+
+    <!-- Book 1 -->
+    <h2 id="book-1">Book 1: Being Without Belonging <span class="status-tag revision">in revision</span></h2>
+
+    <div class="info-card">
+        <h4>Being Without Belonging</h4>
+        <div class="card-meta">62,000 words &middot; 17 chapters &middot; First draft complete</div>
+        <p>Rin, fifteen, is a marginalised trainee at an elite Shadow Academy &mdash; a floating institution above a city built on suppressed collective trauma. He cannot access his own shadow, having been separated from it through familial trauma and institutional pressure.</p>
+        <p>When he discovers an underground community of people reclaiming their shadows outside the system &mdash; and that his AI companion is not what it seems &mdash; Rin must choose between the academy&rsquo;s promise of belonging through conformity and a harder kind of freedom: leaving without graduating, incomplete but intact.</p>
+    </div>
+
+    <p><strong>Current status:</strong> Manuscript complete. Undergoing systematic revision and English translation. Query materials in preparation.</p>
+
+    <!-- Book 2 -->
+    <h2 id="book-2">Book 2: Belonging Without Innocence <span class="status-tag development">in development</span></h2>
+
+    <div class="info-card">
+        <h4>Belonging Without Innocence</h4>
+        <div class="card-meta">24 chapters planned &middot; First 8 chapters drafted</div>
+        <p>Two years later, Rin is seventeen and living underground. He has developed a dangerous ability &mdash; making invisible things visible &mdash; and has become a figure of influence in the community he once entered as a refugee. The question shifts from <em>can I exist?</em> to <em>after existing, how do I avoid becoming what hurt me?</em></p>
+        <p>The underground is fragmenting. Shadow-stripped people are gathering. Government surveillance tightens. And something buried beneath all of it &mdash; something no one was supposed to find &mdash; is awakening.</p>
+    </div>
+
+    <p><strong>Current status:</strong> First 8 chapters drafted. Structural outline and character design complete. Remaining chapters in scene-level design.</p>
+
+    <!-- Themes -->
+    <h2 id="themes">Themes</h2>
+
+    <ul class="theme-list">
+        <li>Dissociation and false integration</li>
+        <li>Institutional soft violence</li>
+        <li>Chosen family and queer kinship</li>
+        <li>Transgender embodiment</li>
+        <li>The ethics of power once gained</li>
+        <li>Collective trauma as infrastructure</li>
+        <li>Psychoanalytic training as lived experience</li>
+        <li>Incompleteness as wholeness</li>
+    </ul>
+
+    <!-- Timeline -->
+    <h2 id="timeline">Timeline</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="year">2018</div>
+            <h4>Indie game project</h4>
+            <p>QPHU begins as an indie RPG concept &mdash; a game about shadows, dissociation, and healing. World-building and character design develop through game design methodology.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2024</div>
+            <h4>Project established</h4>
+            <p>QPHU formally established as a creative project. World-building, character design, and narrative structure development.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2024&ndash;2025</div>
+            <h4>Transition to fiction</h4>
+            <p>The project expands beyond game format into a novel series. The world&rsquo;s emotional architecture translates naturally into narrative. Book 1 drafting begins and completes at 62,000 words.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2025</div>
+            <h4>Serialisation and Book 2</h4>
+            <p>Serialisation begins on <a href="https://negotiatingwithmyghosts.substack.com/" target="_blank">Negotiating with My Ghost</a>. Book 2 development starts.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">2026</div>
+            <h4>Revision and Book 2</h4>
+            <p>Book 1 in systematic revision and English translation. Book 2 structural outline complete, scene-level design and drafting in progress. Publication research underway.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../index.html">&larr; Back to Research Hub</a>
+        <p>Xiaomeng Qiao &middot; QPHU</p>
+    </div>
+
+</main>
+
+<script>
+    const sections = document.querySelectorAll('h2[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
