@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Drifting Subject — Xiaomeng Qiao</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #1c2a35;
+            color: #c8d6df;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-size: 1.15rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.78rem;
+            color: #8a9fb0;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .sidebar nav { margin-bottom: 2rem; flex: 1; }
+
+        .sidebar .nav-group { margin-bottom: 1.2rem; }
+
+        .sidebar .nav-group-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active { color: #e8eff4; }
+
+        .sidebar .links {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        /* Main content */
+        .main {
+            margin-left: 260px;
+            padding: 3rem 4rem 5rem;
+            max-width: 960px;
+        }
+
+        .hero { margin-bottom: 3rem; }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.05rem;
+            color: #5a7a8f;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #1c2a35;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        h3 {
+            font-size: 1.1rem;
+            color: #2d4a5e;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+            font-size: 0.95rem;
+        }
+
+        .main a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+            transition: border-color 0.2s;
+        }
+
+        .main a:hover { border-color: #2d4a5e; }
+
+        em { color: #3a3a3a; }
+        strong { color: #1c2a35; }
+
+        /* Info cards */
+        .info-card {
+            border: 1px solid #d8e2e9;
+            border-left: 3px solid #2d4a5e;
+            padding: 1.5rem;
+            background: #fafcfd;
+            margin: 1.5rem 0;
+        }
+
+        .info-card h4 {
+            font-size: 1rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .info-card .card-meta {
+            font-size: 0.78rem;
+            color: #5a7a8f;
+            margin-bottom: 0.6rem;
+        }
+
+        .info-card p {
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* RQ block */
+        .rq-block {
+            border: 1px solid #d8e2e9;
+            padding: 1.5rem 2rem;
+            background: #fafcfd;
+            margin: 1.5rem 0;
+        }
+
+        .rq-block .rq-main {
+            font-size: 1.05rem;
+            color: #1c2a35;
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .rq-block ol {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .rq-block ol li {
+            font-size: 0.9rem;
+            color: #3a3a3a;
+            padding: 0.2rem 0;
+        }
+
+        /* Material groups */
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .material-item {
+            padding: 1.2rem 1.5rem;
+            background: #f5f8fa;
+            border: 1px solid #e0e6eb;
+        }
+
+        .material-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .material-item p {
+            font-size: 0.82rem;
+            color: #5a6a7a;
+            margin-bottom: 0;
+        }
+
+        /* Emerging patterns */
+        .pattern-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .pattern-list li {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        .pattern-list li:last-child { border-bottom: none; }
+
+        .pattern-label {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            font-weight: bold;
+        }
+
+        .pattern-desc {
+            font-size: 0.85rem;
+            color: #5a6a7a;
+            margin-top: 0.3rem;
+        }
+
+        .provisional-note {
+            font-size: 0.8rem;
+            color: #7a6030;
+            background: #f5f0e6;
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 2px;
+            font-family: -apple-system, sans-serif;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Reference list */
+        .ref-list {
+            list-style: none;
+            margin: 1rem 0;
+            column-count: 2;
+            column-gap: 2rem;
+        }
+
+        .ref-list li {
+            font-size: 0.82rem;
+            color: #5a6a7a;
+            padding: 0.3rem 0;
+            break-inside: avoid;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 1.5rem 0;
+            border-left: 2px solid #d8e2e9;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.4rem;
+            width: 8px;
+            height: 8px;
+            background: #2d4a5e;
+            border-radius: 50%;
+        }
+
+        .timeline-item .year {
+            font-size: 0.75rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .timeline-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin: 0.2rem 0;
+        }
+
+        .timeline-item p {
+            font-size: 0.83rem;
+            color: #5a6a7a;
+        }
+
+        /* Related grid */
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .related-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: #f5f8fa;
+            border: 1px solid #e0e6eb;
+            transition: border-color 0.2s;
+        }
+
+        .related-item:hover { border-color: #c0d0da; }
+
+        .related-item a { border-bottom: none; }
+
+        .related-item .layer-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5a7a8f;
+            margin-bottom: 0.4rem;
+        }
+
+        .related-item h4 {
+            font-size: 0.92rem;
+            color: #1c2a35;
+            margin-bottom: 0.3rem;
+        }
+
+        .related-item p {
+            font-size: 0.78rem;
+            color: #5a6a7a;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e6eb;
+            text-align: center;
+        }
+
+        .footer a {
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            border-bottom: none;
+        }
+
+        .footer a:hover { color: #2d4a5e; }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: #b0bec5;
+            margin-top: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; padding: 1.5rem; }
+            .sidebar .links { margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem 4rem; }
+            .hero h1 { font-size: 1.6rem; }
+            .material-grid { grid-template-columns: 1fr; }
+            .ref-list { column-count: 1; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst in training &middot; researcher &middot; writer</div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">Research</div>
+            <a href="#core-question">Core Question</a>
+            <a href="#methodology">Methodology</a>
+            <a href="#materials">Materials</a>
+            <a href="#emerging-patterns">Emerging Patterns</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Output</div>
+            <a href="#references">Key References</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Context</div>
+            <a href="#timeline">Timeline</a>
+            <a href="#related">Related</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Projects</div>
+            <a href="../index.html">&larr; Research Hub</a>
+            <a href="../chinese-subjectivity/">Chinese Subjectivity</a>
+            <a href="../gender-trans/">Gender &amp; Trans</a>
+            <a href="../clinical/">Clinical</a>
+        </div>
+    </nav>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://apsychoanalyticvibecoder.substack.com" target="_blank">PVC</a>
+    </div>
+</aside>
+
+<main class="main">
+
+    <section class="hero">
+        <h1>The Drifting Subject</h1>
+        <div class="tagline">Opting Out in Chinese Cultural-Historical Contexts</div>
+    </section>
+
+    <!-- Core Question -->
+    <h2 id="core-question">Core Question</h2>
+
+    <p>China has a long tradition of &ldquo;opting out&rdquo; &mdash; from ancient reclusion to contemporary phenomena like &#36538;&#24179; and &#28070;, and to collective symbolic acts that refuse all existing codes. These forms echo one another across two millennia, yet they are not the same. This dissertation investigates the genealogy from a psychoanalytic perspective: the internal psychological mechanisms, and what genuinely supports subject formation.</p>
+
+    <div class="rq-block">
+        <div class="rq-main">What is &ldquo;opting out&rdquo; (&#36864;&#20986;) in Chinese cultural-historical contexts?</div>
+        <ol>
+            <li>What forms does it take?</li>
+            <li>What are the internal psychological mechanisms of these forms?</li>
+            <li>What is their relationship to subjectivity formation?</li>
+            <li>How do they relate to traditions of opting out in other cultures?</li>
+        </ol>
+    </div>
+
+    <!-- Methodology -->
+    <h2 id="methodology">Methodology</h2>
+
+    <div class="info-card">
+        <h4>Depth Hermeneutics + Psychoanalytic Hermeneutics</h4>
+        <div class="card-meta">Thompson (1990) &middot; Lorenzer &middot; Hollway &amp; Jefferson</div>
+        <p>The research follows a hermeneutic methodology, not standard qualitative coding. Cultural texts, historical materials, literary works, and contemporary phenomena are interpreted through a three-phase procedure: <strong>socio-historical analysis</strong> (reconstructing the conditions of production), <strong>formal/discursive analysis</strong> (structural features of the texts), and <strong>interpretation/re-interpretation</strong> (depth-level meaning, including what the texts provoke in the researcher).</p>
+        <p>The psychoanalytic dimension draws on Lorenzer&rsquo;s <em>scenic understanding</em>: the researcher&rsquo;s affective and embodied responses to the material are not noise to be eliminated but methodological tools &mdash; traces of what the text carries but does not say.</p>
+        <p>The researcher&rsquo;s positionality &mdash; Chinese, queer, in psychoanalytic training, Buddhist practitioner &mdash; is an epistemological condition, not a disclaimer.</p>
+    </div>
+
+    <p style="font-size: 0.85rem; color: #5a7a8f; font-style: italic;">Theoretical frameworks (Laplanche, Ferenczi, Kohut) are not the starting point of the research. They emerge as findings from the interpretive process &mdash; the material demanded them, not the other way around.</p>
+
+    <!-- Materials -->
+    <h2 id="materials">Materials</h2>
+
+    <p>The research draws on cultural texts, historical materials, and contemporary phenomena across a wide temporal range. Materials are organised not chronologically but by the mode of opting out they represent.</p>
+
+    <div class="material-grid">
+        <div class="material-item">
+            <h4>Ancient Traditions of Withdrawal</h4>
+            <p>The <em>shidafu</em> (&#22763;&#22823;&#22827;) tradition and its internal &#20986;&#19990;/&#20837;&#19990; tension. The Seven Sages of the Bamboo Grove. Buddhist reclusion and the <em>Biographies of Eminent Monks</em> (&#39640;&#20711;&#20256;).</p>
+        </div>
+        <div class="material-item">
+            <h4>Contemporary Withdrawal</h4>
+            <p>&#36538;&#24179; (lying flat) and low-consumption communities. &#28070; (emigration), &#36208;&#32447; (unauthorised border crossing), liberal arguments for exit. Stand-up comedy. Independent games.</p>
+        </div>
+        <div class="material-item">
+            <h4>Collective Symbolic Acts</h4>
+            <p>Contemporary moments where the refusal to speak within any existing code becomes itself a form of communication.</p>
+        </div>
+        <div class="material-item">
+            <h4>Taiwanese and Queer Traditions</h4>
+            <p>Taiwanese literature, especially its queer tradition &mdash; alternative genealogies of subjectivity outside the mainland framework.</p>
+        </div>
+    </div>
+
+    <h3>Dialogue Layer</h3>
+    <p>The Chinese materials are brought into conversation with other traditions of opting out: Buddhist renunciation, queer refusal, and the Western &ldquo;Great Refusal&rdquo; (Marcuse). The dialogue reveals what is specific to the Chinese forms.</p>
+
+    <!-- Emerging Patterns -->
+    <h2 id="emerging-patterns">Emerging Patterns</h2>
+
+    <div class="provisional-note">provisional &mdash; emerging from the interpretive process, not a predetermined framework</div>
+
+    <p>Four distinct modes of opting out are beginning to emerge from the materials. These are not fixed categories but interpretive orientations that will be tested and revised as the analysis deepens.</p>
+
+    <ul class="pattern-list">
+        <li>
+            <div class="pattern-label">Ghostly Persistence</div>
+            <div class="pattern-desc">Becoming visible through invisible means. Not direct confrontation, not withdrawal, but a spectral presence within existing symbolic systems. Stand-up comedy, independent games, queer literature.</div>
+        </li>
+        <li>
+            <div class="pattern-label">Economic Withdrawal</div>
+            <div class="pattern-desc">Refusal to participate in the capitalist economic order &mdash; without leaving the physical space, without switching symbolic systems. &#36538;&#24179;, low-consumption communities.</div>
+        </li>
+        <li>
+            <div class="pattern-label">Switching the Other</div>
+            <div class="pattern-desc">Not refusal to translate, but translation using a different set of codes. Rejecting one Other&rsquo;s symbolic system while accepting another&rsquo;s. &#28070;, liberal exit arguments. The act of translation itself is not interrupted.</div>
+        </li>
+        <li>
+            <div class="pattern-label">Beyond-Symbolic Translation</div>
+            <div class="pattern-desc">Communication that transcends all symbolic codes. The absence of content becomes itself the message. Collective acts of symbolic refusal.</div>
+        </li>
+    </ul>
+
+    <p style="font-size: 0.85rem; color: #5a7a8f;">A cross-cutting phenomenon &mdash; <em>defection</em> (&#20498;&#25096;) &mdash; complicates the picture: figures who once refused to translate later translate willingly (e.g., Zhang Yimou, Chen Kaige). Refusal may not be a stable position.</p>
+
+    <!-- Key References -->
+    <h2 id="references">Key References</h2>
+
+    <h3>Methodology</h3>
+    <ul class="ref-list">
+        <li>Thompson, J. B. (1990). <em>Ideology and Modern Culture.</em></li>
+        <li>Kr&uuml;ger, S. (2024). <em>Formative Media.</em></li>
+        <li>Bereswill, M. et al. (2010). Alfred Lorenzer and the depth-hermeneutic method.</li>
+        <li>Hollway, W. &amp; Jefferson, T. (2000). <em>Doing Qualitative Research Differently.</em></li>
+        <li>Rothe, K. et al. (Eds.) (2022). <em>Cultural Analysis Now!</em></li>
+    </ul>
+
+    <h3>Theory</h3>
+    <ul class="ref-list">
+        <li>Laplanche, J. (1999). <em>Essays on Otherness.</em></li>
+        <li>Ferenczi, S. (1933). Confusion of the tongues.</li>
+        <li>Kohut, H. (1971). <em>The Analysis of the Self.</em></li>
+        <li>Saketopoulou, A. (2023). <em>Sexuality Beyond Consent.</em></li>
+        <li>Marcuse, H. (1964). <em>One-Dimensional Man.</em></li>
+        <li>Halberstam, J. (2005). <em>In a Queer Time and Place.</em></li>
+    </ul>
+
+    <!-- Timeline -->
+    <h2 id="timeline">Timeline</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="year">September 2024</div>
+            <h4>Programme begins</h4>
+            <p>Enrolled in PsyaD at Boston Graduate School of Psychoanalysis. Coursework begins.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">November 2025</div>
+            <h4>First proposal draft</h4>
+            <p>Initial dissertation proposal written. Research question and theoretical framework outlined, but the project stalls &mdash; the method and the question don&rsquo;t feel aligned.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">January 2026</div>
+            <h4>Research methods course</h4>
+            <p>Qualitative research methods course with dissertation supervisor. Attempt to develop the proposal as a course project. RQ undergoes multiple revisions; literature review and preliminary analysis begin.</p>
+        </div>
+        <div class="timeline-item">
+            <div class="year">May 2026</div>
+            <h4>Methodology breakthrough</h4>
+            <p>Method identified as depth hermeneutics + psychoanalytic hermeneutics. RQ reframed: phenomenon-centred, not theory-centred. Internal working proposal completed. Currently reading methodology literature and preparing for formal proposal submission.</p>
+        </div>
+    </div>
+
+    <!-- Related -->
+    <h2 id="related">Related</h2>
+
+    <div class="related-grid">
+        <div class="related-item">
+            <div class="layer-label">Track Page</div>
+            <a href="../chinese-subjectivity/">
+                <h4>Chinese Subjectivity</h4>
+            </a>
+            <p>Independent publications in this research line.</p>
+        </div>
+        <div class="related-item">
+            <div class="layer-label">Research Programme</div>
+            <a href="../buddhism-psychoanalysis-research/">
+                <h4>Buddhism &times; Psychoanalysis</h4>
+            </a>
+            <p>Dialogue layer: Buddhist renunciation tradition.</p>
+        </div>
+        <div class="related-item">
+            <div class="layer-label">All Research</div>
+            <a href="../index.html">
+                <h4>Research Hub</h4>
+            </a>
+            <p>Full overview of research programmes and publications.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../index.html">&larr; Back to Research Hub</a>
+        <p>Xiaomeng Qiao &middot; The Drifting Subject</p>
+    </div>
+
+</main>
+
+<script>
+    const sections = document.querySelectorAll('h2[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
