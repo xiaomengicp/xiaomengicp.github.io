@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV — Xiaomeng Qiao</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c2c2c;
+            background: #fff;
+            line-height: 1.7;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #1c2a35;
+            color: #c8d6df;
+            padding: 2.5rem 1.5rem;
+            overflow-y: auto;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            font-size: 1.15rem;
+            color: #e8eff4;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .sidebar .subtitle {
+            font-size: 0.78rem;
+            color: #8a9fb0;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .sidebar nav { margin-bottom: 2rem; flex: 1; }
+        .sidebar .nav-group { margin-bottom: 1.2rem; }
+
+        .sidebar .nav-group-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #5a7a8f;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #a0b8c8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active { color: #e8eff4; }
+
+        .sidebar .links {
+            margin-top: auto;
+            padding-top: 1.5rem;
+        }
+
+        .sidebar .links a {
+            display: inline-block;
+            color: #5a7a8f;
+            text-decoration: none;
+            font-size: 0.75rem;
+            margin-right: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar .links a:hover { color: #a0b8c8; }
+
+        .main {
+            margin-left: 260px;
+            padding: 3rem 4rem 5rem;
+            max-width: 960px;
+        }
+
+        .hero { margin-bottom: 3rem; }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #1c2a35;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .contact {
+            font-size: 0.85rem;
+            color: #5a7a8f;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero .contact a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+        }
+
+        .hero .contact a:hover { border-color: #2d4a5e; }
+
+        .hero .interests {
+            font-size: 0.85rem;
+            color: #5a7a8f;
+            font-style: italic;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #1c2a35;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e0e6eb;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        h3 {
+            font-size: 1rem;
+            color: #2d4a5e;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #3a3a3a;
+            font-size: 0.95rem;
+        }
+
+        .main a {
+            color: #2d4a5e;
+            text-decoration: none;
+            border-bottom: 1px solid #c0d0da;
+            transition: border-color 0.2s;
+        }
+
+        .main a:hover { border-color: #2d4a5e; }
+
+        .cv-list {
+            list-style: none;
+            margin: 0.8rem 0;
+        }
+
+        .cv-list li {
+            font-size: 0.88rem;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid #f0f3f5;
+            color: #3a3a3a;
+        }
+
+        .cv-list li em { color: #5a6a7a; }
+        .cv-list li strong { color: #1c2a35; }
+
+        .cv-list .year {
+            font-size: 0.75rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+            margin-right: 0.4rem;
+        }
+
+        .cv-list .dates {
+            float: right;
+            font-size: 0.78rem;
+            color: #5a7a8f;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .pub-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 2px;
+            margin-right: 0.3rem;
+            font-family: -apple-system, sans-serif;
+        }
+
+        .pub-tag.published { background: #e6f3e6; color: #2a6a2a; }
+        .pub-tag.accepted { background: #e8eef6; color: #2d4a5e; }
+        .pub-tag.invited { background: #f5f0e6; color: #7a6030; }
+        .pub-tag.award { background: #f5e6f0; color: #6a2d5e; }
+        .pub-tag.professional { background: #eff0f0; color: #4a4a4a; }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e6eb;
+            text-align: center;
+        }
+
+        .footer a {
+            font-size: 0.82rem;
+            color: #5a7a8f;
+            border-bottom: none;
+        }
+
+        .footer a:hover { color: #2d4a5e; }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: #b0bec5;
+            margin-top: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { position: relative; width: 100%; height: auto; padding: 1.5rem; }
+            .sidebar .links { margin-top: 1.5rem; }
+            .main { margin-left: 0; padding: 2rem 1.5rem 4rem; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <h1>Xiaomeng Qiao</h1>
+    <div class="subtitle">psychoanalyst in training &middot; researcher &middot; writer</div>
+
+    <nav>
+        <div class="nav-group">
+            <div class="nav-group-title">CV</div>
+            <a href="#education">Education</a>
+            <a href="#training">Training</a>
+            <a href="#awards">Awards</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Publications</div>
+            <a href="#peer-reviewed">Peer-Reviewed</a>
+            <a href="#professional">Professional</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Activity</div>
+            <a href="#presentations">Presentations</a>
+            <a href="#teaching">Teaching</a>
+            <a href="#service">Service</a>
+            <a href="#engagement">Public Engagement</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-title">Projects</div>
+            <a href="../index.html">&larr; Research Hub</a>
+        </div>
+    </nav>
+
+    <div class="links">
+        <a href="https://chinesepsychoanalyticscene.substack.com" target="_blank">CPS</a>
+        <a href="https://hekukaixin.com" target="_blank">hekukaixin</a>
+    </div>
+</aside>
+
+<main class="main">
+
+    <section class="hero">
+        <h1>Xiaomeng Qiao &#20052;&#26195;&#33804;</h1>
+        <div class="contact">
+            <a href="mailto:xiaomeng.qiao.ayame9joe@gmail.com">xiaomeng.qiao.ayame9joe@gmail.com</a> &middot;
+            <a href="https://hekukaixin.com">hekukaixin.com</a> &middot;
+            <a href="../index.html">Research Hub</a> &middot;
+            ORCID: <a href="https://orcid.org/0009-0003-2301-7446" target="_blank">0009-0003-2301-7446</a>
+        </div>
+        <div class="interests">Research interests: Psychoanalysis, Chinese culture, gender &amp; sexuality, queer studies, Buddhism</div>
+    </section>
+
+    <h2 id="education">Education</h2>
+    <ul class="cv-list">
+        <li><strong>PsyaD, Psychoanalysis, Society and Culture</strong> <span class="dates">2024&ndash;present</span><br>Boston Graduate School of Psychoanalysis (BGSP)</li>
+        <li><strong>MA, Psychoanalytic Research</strong> <span class="dates">2022&ndash;2024</span><br>The Tavistock and Portman NHS Foundation Trust, UK</li>
+        <li><strong>MA, Game Design and Creative Practice</strong> <span class="dates">2011&ndash;2014</span><br>Communication University of China</li>
+        <li><strong>BS, Geographic Information Systems</strong> (Minor: Psychology) <span class="dates">2007&ndash;2011</span><br>Beijing Normal University</li>
+    </ul>
+
+    <h2 id="training">Psychoanalytic Training</h2>
+    <ul class="cv-list">
+        <li>Psychoanalytic Training (PTP), ICPLA <span class="dates">2023&ndash;present</span></li>
+        <li>Expanding Psychoanalytic Practice in Communities, APsaA / IPA / CFS <span class="dates">2025&ndash;2026</span></li>
+        <li>P-HOLE (Psychoanalytic Hub for Online Liberatory Education) <span class="dates">2025&ndash;2026</span></li>
+        <li>Psychodynamic Psychotherapy (Child &amp; Adolescent), Chicago Psychoanalytic Institute <span class="dates">2020&ndash;2024</span></li>
+        <li>Psychoanalytic Psychotherapy (Adult), International Psychotherapy Institute <span class="dates">2019&ndash;2021</span></li>
+    </ul>
+
+    <h2 id="memberships">Professional Memberships</h2>
+    <ul class="cv-list">
+        <li>International Psychoanalytical Association (IPA) &mdash; Psychoanalyst Candidate</li>
+        <li>American Psychoanalytic Association (APsaA) &mdash; Psychoanalyst Candidate</li>
+        <li>International Psychoanalytic Studies Organization (IPSO) &mdash; Member</li>
+        <li>International Association for Psychoanalytic Self Psychology (IAPSP) &mdash; Member</li>
+        <li>Chicago Psychoanalytic Society &mdash; Candidate Member</li>
+        <li>Association for Psychosocial Studies (APS), UK &mdash; Member</li>
+    </ul>
+
+    <h2 id="awards">Awards</h2>
+    <ul class="cv-list">
+        <li><span class="pub-tag award">2026</span> Journal of LGBTQ+ Mental Health, Outstanding Trainee Paper Award (Winner)</li>
+        <li><span class="pub-tag award">2025</span> APsaA Committee on Gender &amp; Sexuality, Ralph Roughton Paper Award (Runner-up)</li>
+        <li><span class="pub-tag award">2025</span> ICPLA Gender, Sexuality, LGBTQ+ Essay Award</li>
+        <li><span class="pub-tag award">2024</span> Chicago Psychoanalytic Institute, Erika Schmidt Essay Prize (First Prize)</li>
+    </ul>
+
+    <h2 id="peer-reviewed">Peer-Reviewed Publications</h2>
+
+    <h3>Published</h3>
+    <ul class="cv-list">
+        <li><span class="pub-tag published">published</span> Qiao, X. (2026). Becoming Myself: Transgender Authentic Selfhood in the Chinese Context and Transgender Self-Experience. <em>Psychoanalytic Inquiry</em>, 47(5). <a href="https://doi.org/10.1080/07351690.2026.2658392" target="_blank">DOI</a></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). From Silence to Song: True Self-Emergence Through Creative Mourning. <em>Studies in Gender and Sexuality</em>, 26(4), 318&ndash;330. <a href="https://doi.org/10.1080/15240657.2025.2596468" target="_blank">DOI</a></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). Deprivation and disruption: The development of narcissistic vulnerability and toxic masculinity in some Chinese contexts. <em>Psychoanalysis, Self and Context</em>, 20(2), 237&ndash;253. <a href="https://doi.org/10.1080/24720038.2024.2398679" target="_blank">DOI</a></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). Gaming the unconscious: The relational and social unconscious in a contemporary Chinese case study. <em>Psychoanalysis and Psychotherapy in China</em>, 8(1&ndash;2), 14&ndash;24. <a href="https://doi.org/10.33212/ppc.v8.2025.14" target="_blank">DOI</a></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2025). The role of social media in shaping mental health discourse: A case study of China&rsquo;s psychoanalysis and counselling narratives. <em>Psychoanalysis and Psychotherapy in China</em>, 8(1&ndash;2), 115&ndash;125. <a href="https://doi.org/10.33212/ppc.v8.2025.115" target="_blank">DOI</a></li>
+        <li><span class="pub-tag published">published</span> Qiao, X. (2024). Mother archetypes in Chinese cultural narratives: A psychoanalytic perspective. <em>Psychoanalysis and Psychotherapy in China</em>, 7(1&ndash;2), 139&ndash;153. <a href="https://doi.org/10.33212/ppc.v7.2024.139" target="_blank">DOI</a></li>
+    </ul>
+
+    <h3>Forthcoming / Accepted</h3>
+    <ul class="cv-list">
+        <li><span class="pub-tag accepted">forthcoming</span> <span class="pub-tag award">Outstanding Trainee Paper 2026</span> Qiao, X. Ghostly Persistence: Disavowal, Remainder, and the Indigestible Queer Subject in China. <em>Journal of LGBTQ+ Mental Health</em>.</li>
+        <li><span class="pub-tag accepted">forthcoming</span> Qiao, X. Self-Hollowing: Ghosts Within Ourselves. <em>Psychoanalysis, Self and Context</em>.</li>
+        <li><span class="pub-tag accepted">forthcoming</span> Qiao, X. Oedipal Variations in Chinese Luoshan Motif. <em>Psychoanalysis and Psychotherapy in China</em>.</li>
+    </ul>
+
+    <h3>Invited</h3>
+    <ul class="cv-list">
+        <li><span class="pub-tag invited">invited</span> Qiao, X. Confusion of Tongues in the Chinese Context. <em>Psychoanalytic Inquiry</em> (journal commission).</li>
+        <li><span class="pub-tag invited">invited</span> Qiao, X. Chapter in <em>Radicalising Contemporary Psychoanalysis: Theories and Tools for Resistance</em> (edited volume; proposal accepted).</li>
+        <li><span class="pub-tag invited">invited</span> Qiao, X. Article for special issue &ldquo;Psychoanalysis, Politics, and Public Humanities.&rdquo; <em>Humanities</em>.</li>
+    </ul>
+
+    <h2 id="professional">Professional Publications</h2>
+    <ul class="cv-list">
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). <a href="https://tapmagazine.org/all-articles/what-school-are-you" target="_blank">What School Are You?</a> <em>The American Psychoanalyst</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). <a href="https://analytic-room.com/essays/between-worlds-a-chinese-analysts-journey-by-xiaomeng-qiao/" target="_blank">Between Worlds: A Chinese Analyst&rsquo;s Journey.</a> <em>Room: A Sketchbook for Analytic Action</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). <a href="https://apsa.org/ai-as-transitional-object-and-echo_i10/" target="_blank">The Inner Negotiator: AI as Transitional Object and Echo in the Treatment of Complex Trauma.</a> <em>APsaA Committee on AI Report</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2026). <a href="https://thepsychoanalyticquarterly.substack.com/p/murakamis-traumatic-cities-when-time" target="_blank">Murakami&rsquo;s Traumatic Cities: When Time Stops in the Unconscious.</a> <em>The Psychoanalytic Quarterly</em> (Substack).</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). <a href="https://tapmagazine.org/all-articles/between-two-names" target="_blank">Between Two Names.</a> <em>The American Psychoanalyst</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). <a href="https://tapmagazine.org/all-articles/the-shadow-of-the-dead-mother" target="_blank">The Shadow of the Dead Mother.</a> <em>The American Psychoanalyst</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). <a href="https://analytic-room.com/essays/the-seen-and-the-unseen-by-xiaomeng-qiao/" target="_blank">The Seen and the Unseen: AI&rsquo;s Disquieting Impact.</a> <em>Room: A Sketchbook for Analytic Action</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (2025). <a href="https://apsa.org/ai-assisted-creation-and-narcissistic-predicament/" target="_blank">AI Assisted Creation and Narcissistic Predicament.</a> <em>APsaA Committee on AI Report</em>.</li>
+        <li><span class="pub-tag professional">professional</span> Qiao, X. (forthcoming 2027). <em>Dear Candidate: Analysts from around the World Offer Personal Reflections on Psychoanalytic Training, Education, and the Profession</em> [Chinese translation]. &#19975;&#21315;&#24515;&#29702;.</li>
+    </ul>
+
+    <h2 id="presentations">Invited Talks &amp; Presentations</h2>
+    <ul class="cv-list">
+        <li><span class="year">2026</span> Understanding Chinese Subjectivity: Growth Rings, Psychoanalytic Development, and Clinical Implications. <strong>British Psychoanalytic Foundation (BPF)</strong> (forthcoming)</li>
+        <li><span class="year">2026</span> Ghostly Persistence: Disavowal, Remainder, and the Indigestible Queer Subject in China. Invited talk, <strong>Journal of LGBTQ+ Mental Health</strong></li>
+        <li><span class="year">2026</span> Shidafu and Narcissistic Structure (&#22763;&#22823;&#22827;&#19982;&#33258;&#24651;&#32467;&#26500;). <strong>Association for Psychosocial Studies (APS)</strong> (forthcoming)</li>
+        <li><span class="year">2026</span> Cisteria! A Psychoanalysis Against Anti-Trans Panics. Pre-Conference Workshop, <strong>Division 39 Spring Meeting</strong></li>
+        <li><span class="year">2026</span> Roundtable. <strong>Room</strong></li>
+        <li><span class="year">2026</span> Cultural Sensitivity in Psychoanalytic Education. <strong>Chicago Psychoanalytic Institute</strong></li>
+        <li><span class="year">2024</span> Narcissistic Vulnerability and Toxic Masculinity. <strong>Chicago Psychoanalytic Institute</strong></li>
+        <li><span class="year">2021</span> Psychoanalytic Perspectives on Transgender Experience. <strong>Queer China UK</strong></li>
+        <li><span class="year">2017</span> Chinese Video Game Criticism Archive. <strong>Chinese DiGRA</strong>, Hong Kong</li>
+    </ul>
+
+    <h2 id="teaching">Teaching</h2>
+    <ul class="cv-list">
+        <li><strong>&#28145;&#28023;&#20043;&#23478; PH 2.0 Psychodynamic Programme</strong> &mdash; Lecturer: Sexuality &amp; Gender; Self Psychology Technique <span class="dates">2024&ndash;present</span></li>
+        <li><strong>Freie Universit&auml;t Berlin</strong> &mdash; Guest Lecturer, &ldquo;Gender, Queerness and Culture in China and Latin America&rdquo; Seminar <span class="dates">2026</span></li>
+        <li><strong>Chicago Psychoanalytic Institute, PEP Programme</strong> &mdash; Guest Lecturer, Self Psychology <span class="dates">2025</span></li>
+        <li><strong>ICPLA Psychoanalytic Training Programme</strong> &mdash; Interviewer/Admissions <span class="dates">2024&ndash;present</span></li>
+    </ul>
+
+    <h2 id="service">Service</h2>
+    <ul class="cv-list">
+        <li>APsaA President&rsquo;s Commission on Artificial Intelligence &mdash; Member <span class="dates">2025&ndash;present</span></li>
+        <li>APsaA Committee on Gender and Sexuality &mdash; Member <span class="dates">2025&ndash;present</span></li>
+        <li>ICPLA Candidate Organization Committee (COC) &mdash; Co-Chair <span class="dates">2025&ndash;present</span></li>
+        <li>ICPLA Ad Hoc Committee for Diversity &mdash; Member <span class="dates">2025&ndash;present</span></li>
+        <li><em>Psychoanalysis, Self and Context</em> &mdash; Peer Reviewer <span class="dates">2025&ndash;present</span></li>
+    </ul>
+
+    <h2 id="engagement">Public Engagement</h2>
+    <ul class="cv-list">
+        <li><strong>&#20309;&#33510;&#24320;&#24515;</strong> &mdash; WeChat public account; psychoanalytic writing for Chinese-speaking audiences (20K+ readers)</li>
+        <li><strong>&#21338;&#38597;&#31934;&#31070;&#20998;&#26512;</strong> &mdash; Subscription-based psychoanalytic education platform (260+ paid members)</li>
+        <li><strong>Chinese Psychoanalytic Scene (CPS)</strong> &mdash; <a href="https://chinesepsychoanalyticscene.substack.com/" target="_blank">Substack publication</a> in English (850+ subscribers)</li>
+        <li><strong>Published columnist</strong> &mdash; The Paper (&#28558;&#28227;&#26032;&#38395;) and Initium Media (&#31471;&#20256;&#23186;); psychoanalytic perspectives on games and culture</li>
+        <li><strong>ROOM Podcast</strong> &mdash; Interview: &ldquo;Gaming, Analysis and Identity in the Age of AI&rdquo;</li>
+        <li>Active clinical practice as psychoanalyst</li>
+    </ul>
+
+    <div class="footer">
+        <a href="../index.html">&larr; Back to Research Hub</a>
+        <p>Xiaomeng Qiao &middot; CV</p>
+    </div>
+
+</main>
+
+<script>
+    const sections = document.querySelectorAll('h2[id]');
+    const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
